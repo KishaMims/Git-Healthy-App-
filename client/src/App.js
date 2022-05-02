@@ -10,6 +10,14 @@ import Recipes from "./pages/recipe";
 import SearchFood from "./pages/searchfood";
 import Login from "./pages/login";
 import Contact from "./pages/contact";
+import Auth0Lock from 'auht0-lock';
+
+
+
+const lock = new Auth0Lock(
+    '7kHcCdykKkIirg50ElD91DIL2ON5O2Jb',
+    'cdm-ium.auth0.com/',
+);
 
 
 
