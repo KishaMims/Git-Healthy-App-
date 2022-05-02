@@ -24,7 +24,7 @@ DROP DATABASE IF EXISTS techtonica1;
 CREATE DATABASE techtonica1 WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'C';
 
 
-ALTER DATABASE techtonica1 OWNER TO postgres;
+ALTER DATABASE techtonica1 OWNER TO cadmum;
 
 \connect techtonica1
 
@@ -54,7 +54,7 @@ CREATE TABLE public.students (
 );
 
 
-ALTER TABLE public.students OWNER TO postgres;
+ALTER TABLE public.students OWNER TO cadmum;
 
 --
 -- Name: students_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -69,7 +69,7 @@ CREATE SEQUENCE public.students_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.students_id_seq OWNER TO postgres;
+ALTER TABLE public.students_id_seq OWNER TO cadmum;
 
 --
 -- Name: students_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
