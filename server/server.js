@@ -2,19 +2,47 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config()
+const { auth } = require('express-openid-connect');
 const db = require('../server/db/db-connection.js'); 
 const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 const app = express();
-app.use(express.static(REACT_BUILD_DIR));
 
-const PORT = process.env.PORT || 8080;
+
+const config = {
+    authRequired: false,
+    auth0Logout: true,
+    secret: process.env.SECRET,
+    baseURL: process.env.BASEURL,
+    clientID: process.env.CLIENTID,
+    issuerBaseURL: process.env.ISSUERBASEURL
+  };
+
+app.use(auth(config));
+
+const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
 //creates an endpoint for the route /api
 app.get('/', (req, res) => {
+    console.log(req.oidc.isAuthenticated());
     res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
 });
+
+//creates an endpoint for the user authinticated
+app.get('/api/login', (req, res) => {
+    console.log("Hello");
+    console.log(req.oidc.isAuthenticated());
+    if(req.oidc.isAuthenticated()){
+        res.json(req.oidc.user);
+    } else {
+        res.status(401).json({error: "Error found with auth0"});
+    }
+});
+
+
+
+app.use(express.static(REACT_BUILD_DIR));
 
 //create the get request
 app.get('/api/students', cors(), async (req, res) => {
