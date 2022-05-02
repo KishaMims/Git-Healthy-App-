@@ -7,8 +7,6 @@ const db = require('../server/db/db-connection.js');
 const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 const app = express();
 
-console.log('process env ', process.env);
-
 const config = {
     authRequired: false,
     auth0Logout: true,
