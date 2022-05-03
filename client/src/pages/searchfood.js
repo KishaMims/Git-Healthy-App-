@@ -4,47 +4,49 @@ import React from "react";
 // import myHeaders from "./headertest";
 
 
-function SearchFood() {
+
+function SearchFood(props) {
 //     const [nutrition, setNutrition] = useState([]);
-//     const [query, setQuery] = useState("");
+//     const [food, setFood] = useState("");
 
 
-//     var requestOptions = {
-//         method: 'GET',
-//         headers: myHeaders,
-//         redirect: 'follow'
-//       };
+
+//   var requestOptions = {
+//       method: 'GET',
+//       headers: myHeaders,
+//       redirect: 'follow'
+//     };
+//     console.log(requestOptions);
 
 //       useEffect(() => {
-//       fetch(`https://api.calorieninjas.com/v1/nutrition?query=${query}`, requestOptions)
-//         .then((response) => response.json())
+//       fetch(`https://api.calorieninjas.com/v1/nutrition?query=${food}`, requestOptions)
+      
+//         .then((response) => response.text())
 //         .then(nutrition => {
 //             setNutrition(nutrition);
 //             console.log('Nutrition fetched...', nutrition);
 //     });
-// }, [query]);
+// }, [food]);
         
+/* <div className="Weather">
+<h1>Food Eaten</h1>  
+<form onSubmit={onsubmit}>
+    <input placeholder="Food Eaten" value={food} onChange= {(event) => setFood(event.target.value)} type="food"/>
+    <button type="submit" className="SearchButton" onClick={onsubmit}>Search</button>
+</form>
+<div>
+    {JSON.stringify(nutrition)}
+</div>
+</div> */
         
   return (
-    <div>
-        <p>TEXT HERE</p>
-       {/* <form>
-       <fieldset>
-                <label>Enter Your Meal Below</label>
-                   <input
-                      type="text"
-                      className="add-your-meal-item"
-                      placeholder="10z Steak or 2 apples"
-                      required
-                       value={query}
-                       onChange={(e) => setQuery(e.target.value)}
-                   />
-                    <button type="submit" className="SearchButton" onClick={onsubmit}>Save Meal</button>
-       </fieldset>
-         </form> */}
-         {/* {JSON.stringify(nutrition)} */}
-    </div>
-  )
-}
+    <form className="search-food-form" onSubmit={props.getFoodNutrition}>
+            <input type="text" name="food" placeholder="Enter your meal"/>
+            <button> Check food nutrtion </button>
+
+        </form>
+
+    )
+};
 
 export default SearchFood;

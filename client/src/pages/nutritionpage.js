@@ -1,30 +1,55 @@
 import React from "react";
-import myHeaders from "./headertest";
 import SearchFood from "./searchfood";
+import { useState } from "react";
+import Nutrition from "./nutritiondeatails";
+//import axios from 'axios';
 
-function Nutrition() {
-  
-  
+const FindFood = () => {
+const [nutrtion, setNutrition] = useState([]);
+
+
+//headers: myHeaders, 
 // var myHeaders = new Headers();
-//   myHeaders.append("X-Api-Key", "qLTEP0kL+FQedNFT7fvs7A==5NU1hXtrsqifhB7C");
+
+
+  const getFoodNutrition = (e) => {
+    e.preventDefault();
+    let food = e.target.elements.food.value;
+    console.log(food);
+    fetch(`/api/nutrition?query=${food}`,{
+      })
+        .then((response) =>  response.json())
+        .then((data) => {
+            setNutrition(data);
+            console.log(data);
+        })
+        .catch((err) => console.error(`Error: ${err}`));
+    }
   
-  var requestOptions = {
-    method: 'GET',
-    headers: myHeaders,
-    redirect: 'follow'
-  };
+  // useEffect(()=> {
+  // function getFoodNutrition() {
+  //   fetch(`/nutrition?query=${food}`, {
+  //     method: "POST",
+  //     headers: { 'X-Api-Key': process.env.CALORIENINJAAPIKEY, contentType: 'application/json'},
+  //     body: JSON.stringify({ test: food }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((result) => setNutrition(result))
+  //     .catch((err) => console.log(`Error: ${err}`));
   
-  fetch("https://api.calorieninjas.com/v1/nutrition?query=6oz steak", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
+
+
   return ( 
 
     <div className="HomeTitle">
-        <h1 className="HomeTitle">Git healthy nutrition page</h1>
-        <SearchFood/>
+        <h1 className="HomeTitle">Git healthy Nutrition Page</h1>
+        <SearchFood getFoodNutrition={getFoodNutrition}/>
+        <Nutrition nutrtion={nutrtion}/>
+    <div>
+    {JSON.stringify(nutrtion)}
+    </div>
     </div>
   )
 }
 
-export default Nutrition;
+export default FindFood;

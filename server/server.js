@@ -1,9 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fetch = require('node-fetch');
+// const fetch = (...args) =>
+//  import('node-fetch').then(({ default: fetch }) => fetch(...args));
+//const axios = require('axios');
 require('dotenv').config()
 const { auth } = require('express-openid-connect');
-const db = require('../server/db/db-connection.js'); 
+const db = require('../server/db/db-connection.js');
 const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 const app = express();
 
@@ -15,7 +19,7 @@ const config = {
     baseURL: process.env.BASEURL,
     clientID: process.env.CLIENTID,
     issuerBaseURL: process.env.ISSUERBASEURL
-  };
+};
 
 app.use(auth(config));
 
@@ -23,20 +27,124 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
+
+
+//axios with food inside already 
+// app.get('/test-dino', cors(), async (req, res) => {
+//     console.log('hi');
+//     console.log('env ', process.env);
+//     const result = await axios.get(
+//         'https://api.calorieninjas.com/v1/nutrition?query=onion', 
+//         {
+//             headers: {
+//                 'X-Api-Key': process.env.CALORIE_NINJA_API_KEY,
+//             },
+//         }
+//     )
+//     console.log('result ', result);
+
+//     res.status(200).end('ok');
+// });
+
+
+// fetch nodejs
+
+//  axios 
+// var reqoptions = {
+//   method: 'get',
+//   url: `https://api.calorieninjas.com/v1/nutrition?query=${food}`,
+//   headers: { 
+//     'X-Api-Key': process.env.CALORIENINJAAPIKEY
+//   }
+// };
+
+// axios(reqoptions)
+// .then(function (response) {
+//   console.log(JSON.stringify(response.data));
+// })
+// .catch(function (error) {
+//   console.log(error);
+// });
+
+
+
+// get request with the food item 
+// const makeUrl = (food) => {
+
+// return `https://api.calorieninjas.com/v1/nutrition?query=+${food}`
+
+// };
+
+// app.get('/api/nutrition', cors(), async (req, res) => {
+//     console.log('hi');
+//     const food = req.query.food;
+//     console.log('env ', process.env);
+//     const result = await axios.get(
+//          (makeUrl(food)),
+//         {
+//             headers: {
+//                 'X-Api-Key': process.env.CALORIE_NINJA_API_KEY
+//             },
+//         }
+//     )
+//     console.log('result ', result);
+//     res.send(response.data);
+//     res.status(200).end('ok');
+// });
+
+
 //creates an endpoint for the route /api
 app.get('/', (req, res) => {
+    console.log('I am on line 114');
     console.log(req.oidc.isAuthenticated());
     res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
 });
+
+// POST request for the food item searched
+let food;
+app.post("/api/search-food", (req, res) => {
+    food = req.body.food;
+    res.redirect("/api/nutrition");
+  });
+
+// GET request for the food item searched
+var myHeaders = new Headers();
+myHeaders.append("X-Api-Key", process.env.CALORIENINJAAPIKEY);
+
+
+var requestOptions = {
+    headers: myHeaders,
+};
+
+app.get("/api/nutrition", cors(), async (req, res) => {
+    food = req.query.food;
+
+    const url = `https://api.calorieninjas.com/v1/nutrition?query=${food}`;
+    try {
+      const response = await fetch(url, requestOptions);
+      const data = await response.json();
+      console.log(data);
+      res.send(data);
+    } catch (err) {
+      console.error("Fetch error: ", err);
+    }
+    // fetch(`https://api.calorieninjas.com/v1/nutrition?query=${food}`, requestOptions)
+    //     .then(res => { return res.json(); })
+    //     .then(data => {
+    //         console.log("data from fetch:", data)
+    //        res.json(data);
+    //   })
+});
+
 
 //creates an endpoint for the user authinticated
 app.get('/api/login', (req, res) => {
     console.log("Hello");
     console.log(req.oidc.isAuthenticated());
-    if(req.oidc.isAuthenticated()){
+    if (req.oidc.isAuthenticated()) {
         res.json(req.oidc.user);
     } else {
-        res.status(401).json({error: "Error found with auth0"});
+        res.status(401).json({ error: "Error found with auth0" });
     }
 });
 
@@ -46,7 +154,7 @@ app.use(express.static(REACT_BUILD_DIR));
 
 //create the get request
 app.get('/api/students', cors(), async (req, res) => {
-    
+
     // const STUDENTS = [
 
     //     { id: 1, firstName: 'Lisa', lastName: 'Lee' },
@@ -56,12 +164,12 @@ app.get('/api/students', cors(), async (req, res) => {
     //     { id: 5, firstName: 'Andrea', lastName: 'Trejo' },
     // ];
     // res.json(STUDENTS);
-    try{
+    try {
         const { rows: students } = await db.query('SELECT * FROM students');
         res.send(students);
-    } catch (e){
+    } catch (e) {
         console.log(e);
-        return res.status(400).json({e});
+        return res.status(400).json({ e });
     }
 });
 
@@ -78,7 +186,7 @@ app.post('/api/students', cors(), async (req, res) => {
 });
 
 // delete request
-app.delete('/api/students/:studentId', cors(), async (req, res) =>{
+app.delete('/api/students/:studentId', cors(), async (req, res) => {
     const studentId = req.params.studentId;
     //console.log(req.params);
     await db.query('DELETE FROM students WHERE id=$1', [studentId]);
@@ -87,7 +195,7 @@ app.delete('/api/students/:studentId', cors(), async (req, res) =>{
 });
 
 // Put request - Update request
-app.put('/api/students/:studentId', cors(), async (req, res) =>{
+app.put('/api/students/:studentId', cors(), async (req, res) => {
     const studentId = req.params.studentId;
     const updateStudent = { id: req.body.id, firstname: req.body.firstname, lastname: req.body.lastname }
     //console.log(req.params);
@@ -97,13 +205,13 @@ app.put('/api/students/:studentId', cors(), async (req, res) =>{
     const query = `UPDATE students SET lastname=$1, firstname=$2 WHERE id = ${studentId} RETURNING *`;
     console.log(query);
     const values = [updateStudent.lastname, updateStudent.firstname];
-    try{
+    try {
         const updated = await db.query(query, values);
         console.log(updated.rows[0]);
         res.send(updated.rows[0]);
-    } catch (e){
+    } catch (e) {
         console.log(e);
-        return res.status(400).json({e});
+        return res.status(400).json({ e });
     }
 });
 
