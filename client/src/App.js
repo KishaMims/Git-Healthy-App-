@@ -7,7 +7,7 @@ import Exercises from "./pages/exercise";
 import About from "./pages/about";
 import FindFood from "./pages/nutritionpage";
 import Recipes from "./pages/recipe";
-import SearchFood from "./pages/searchfood";
+//import SearchFood from "./pages/searchfood";
 import Login from "./pages/login";
 import Contact from "./pages/contact";
 
@@ -22,10 +22,10 @@ function App() {
         {/* <Route path='/logout' element={<Login />}/> */}
           <Route path='/home' element={<Home />}/>
           <Route path='/about' element={<About/>}/>
-          <Route path='/nutrition' element={<FindFood/>}/>
+          <Route path='/api/nutrition' element={<FindFood/>}/>
          <Route path='/exercise' element={<Exercises/>}/>
          <Route path='/recipes' element={<Recipes/>}/>
-         <Route path='/searchfood' element={<SearchFood/>}/>
+         {/* <Route path='/api/searchfood' element={<SearchFood/>}/> */}
          <Route path='/contact' element={<Contact/>}/>
         </Routes>
         <Login/>

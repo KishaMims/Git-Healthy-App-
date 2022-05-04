@@ -12,11 +12,10 @@ const {nutrition} = props;
      {" "}Have you eaten today?{" "}</h2>) : (
       <p>
         <span>{nutrition}</span>
-        <span>{JSON.stringify(nutrition)}</span>
-         <span>Food:{nutrition.name}</span>
+         <span>Food:{nutrition.items.name}</span>
          <span>Sugars:{nutrition.sugar_g}</span>
-         <span>Calories:{nutrition.calories}</span>
-         <span>Protien:{nutrition.protien_g}</span>
+         <span>Calories:{nutrition.items.calories}</span>
+         <span>Protien:{nutrition.items.protien_g}</span>
       </p>   
      )}
     </div>

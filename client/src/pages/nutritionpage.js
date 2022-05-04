@@ -5,49 +5,30 @@ import Nutrition from "./nutritiondeatails";
 //import axios from 'axios';
 
 const FindFood = () => {
-const [nutrtion, setNutrition] = useState([]);
-
-
-//headers: myHeaders, 
-// var myHeaders = new Headers();
-
+  const [nutrtion, setNutrition] = useState(null);
 
   const getFoodNutrition = (e) => {
     e.preventDefault();
     let food = e.target.elements.food.value;
-    console.log(food);
-    fetch(`/api/nutrition?query=${food}`,{
+    console.log('food: ', food);
+    fetch(`/api/nutrition?food=${food}`, {
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setNutrition(data);
+        console.log('Food info here', data);
       })
-        .then((response) =>  response.json())
-        .then((data) => {
-            setNutrition(data);
-            console.log(data);
-        })
-        .catch((err) => console.error(`Error: ${err}`));
-    }
-  
-  // useEffect(()=> {
-  // function getFoodNutrition() {
-  //   fetch(`/nutrition?query=${food}`, {
-  //     method: "POST",
-  //     headers: { 'X-Api-Key': process.env.CALORIENINJAAPIKEY, contentType: 'application/json'},
-  //     body: JSON.stringify({ test: food }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((result) => setNutrition(result))
-  //     .catch((err) => console.log(`Error: ${err}`));
-  
+      .catch(err => console.error(err));
+  }
 
-
-  return ( 
+  return (
 
     <div className="HomeTitle">
-        <h1 className="HomeTitle">Git healthy Nutrition Page</h1>
-        <SearchFood getFoodNutrition={getFoodNutrition}/>
-        <Nutrition nutrtion={nutrtion}/>
-    <div>
-    {JSON.stringify(nutrtion)}
-    </div>
+      <h1 className="HomeTitle">Git healthy Nutrition Page</h1>
+      <SearchFood getFoodNutrition={getFoodNutrition} />
+      <Nutrition nutrtion={nutrtion} />
+      <div>
+      </div>
     </div>
   )
 }

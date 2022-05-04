@@ -21,10 +21,11 @@ const config = {
     issuerBaseURL: process.env.ISSUERBASEURL
 };
 
-app.use(auth(config));
+
 
 const PORT = process.env.PORT || 3001;
 app.use(cors());
+app.use(auth(config));
 app.use(express.json());
 
 
@@ -95,6 +96,8 @@ app.use(express.json());
 
 //creates an endpoint for the route /api
 app.get('/', (req, res) => {
+    const d = new Date();
+    res.json({ currentTime: d.toTimeString() });
     console.log('I am on line 114');
     console.log(req.oidc.isAuthenticated());
     res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
@@ -102,8 +105,9 @@ app.get('/', (req, res) => {
 
 // POST request for the food item searched
 let food;
-app.post("/api/search-food", (req, res) => {
+app.post("/api/searchfood", (req, res) => {
     food = req.body.food;
+    console.log(food);
     res.redirect("/api/nutrition");
   });
 
@@ -118,13 +122,14 @@ var requestOptions = {
 
 app.get("/api/nutrition", cors(), async (req, res) => {
     food = req.query.food;
-
+    console.log('req.query:', req.query);
+    console.log('food:', food);
     const url = `https://api.calorieninjas.com/v1/nutrition?query=${food}`;
     try {
       const response = await fetch(url, requestOptions);
       const data = await response.json();
-      console.log(data);
-      res.send(data);
+      console.log('food info here', data);
+      res.send(data.body);
     } catch (err) {
       console.error("Fetch error: ", err);
     }
