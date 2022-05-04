@@ -129,7 +129,7 @@ app.get("/api/nutrition", cors(), async (req, res) => {
       const response = await fetch(url, requestOptions);
       const data = await response.json();
       console.log('food info here', data);
-      res.send(data.body);
+      res.send(data);
     } catch (err) {
       console.error("Fetch error: ", err);
     }

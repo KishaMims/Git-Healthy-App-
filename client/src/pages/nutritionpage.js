@@ -25,6 +25,7 @@ const FindFood = () => {
 
     <div className="HomeTitle">
       <h1 className="HomeTitle">Git healthy Nutrition Page</h1>
+      {JSON.stringify(nutrtion)}
       <SearchFood getFoodNutrition={getFoodNutrition} />
       <Nutrition nutrtion={nutrtion} />
       <div>
