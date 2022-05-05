@@ -21,6 +21,8 @@ const FindFood = () => {
       .catch(err => console.error(err));
   }
 
+
+
   return (
 
     <div className="HomeTitle">
