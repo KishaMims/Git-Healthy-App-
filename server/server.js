@@ -31,14 +31,32 @@ app.get('/', (req, res) => {
 
 //creates an endpoint for the user authinticated
 app.get('/api/login', (req, res) => {
-    console.log("Hello");
-    console.log(req.oidc.isAuthenticated());
-    if(req.oidc.isAuthenticated()){
+    console.log("Hello",req.oidc.user);
+    console.log(req.oidc.user);
+    if (req.oidc.isAuthenticated()) {
         res.json(req.oidc.user);
     } else {
-        res.status(401).json({error: "Error found with auth0"});
+        res.status(401).json({ error: "Error found with auth0" });
     }
 });
+
+// // doing db query insert for user info
+// app.get('/api/login', async (req, res) => {
+//     console.log("Hello",user_name);
+//     console.log(req.oidc.user);
+//     if (req.oidc.isAuthenticated()) {
+//         const searchdb = await db.query(
+//             `SELECT * FROM users WHERE email='${req.oidc.user.email}'`
+//         )
+//         console.log('search results', search)
+//         if(search.rows.length === 0 ){
+//         const addUser =  'INSERT INTO users(name, nickname, email) VALUES($1, $2, $3) RETURNING *', [req.oidc.user.email,  ]
+//         }
+//         res.json(req.oidc.user);
+//     } else {
+//         res.status(401).json({ error: "Error found with auth0" });
+//     }
+// });
 
 
 
