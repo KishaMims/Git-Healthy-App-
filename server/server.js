@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config()
-const { auth } = require('express-openid-connect');
+const { auth, requiresAuth  } = require('express-openid-connect');
 const db = require('../server/db/db-connection.js'); 
 const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 const app = express();
@@ -30,35 +30,39 @@ app.get('/', (req, res) => {
 });
 
 //creates an endpoint for the user authinticated
-app.get('/api/login', (req, res) => {
-    console.log("Hello",req.oidc.user);
-    console.log(req.oidc.user);
-    if (req.oidc.isAuthenticated()) {
-        res.json(req.oidc.user);
-    } else {
-        res.status(401).json({ error: "Error found with auth0" });
-    }
-});
-
-// // doing db query insert for user info
-// app.get('/api/login', async (req, res) => {
-//     console.log("Hello",user_name);
+// app.get('/api/login', (req, res) => {
+//     console.log("Hello",req.oidc.user);
 //     console.log(req.oidc.user);
 //     if (req.oidc.isAuthenticated()) {
-//         const searchdb = await db.query(
-//             `SELECT * FROM users WHERE email='${req.oidc.user.email}'`
-//         )
-//         console.log('search results', search)
-//         if(search.rows.length === 0 ){
-//         const addUser =  'INSERT INTO users(name, nickname, email) VALUES($1, $2, $3) RETURNING *', [req.oidc.user.email,  ]
-//         }
 //         res.json(req.oidc.user);
 //     } else {
 //         res.status(401).json({ error: "Error found with auth0" });
 //     }
 // });
 
+// doing db query insert for user info
+app.get('/api/login', async (req, res) => {
+    console.log(req.oidc.isAuthenticated());
+    console.log(req.oidc.user);
+    if (req.oidc.isAuthenticated()) {
+        const search = await db.query(
+            `SELECT * FROM users WHERE email='${req.oidc.user.email}'`
+        )
+        console.log('search results', search.rows[0]);
+        if(search.rows.length === 0 ){
+        const createUser = await db.query ('INSERT INTO users(name, nickname, email) VALUES($1, $2, $3) RETURNING *', [req.oidc.user.name, req.oidc.user.nickname, req.oidc.user.email]
+        )
+        console.log('createUser', createUser.rows[0])
+    }      
+        res.json(req.oidc.user);
+    } else {
+        res.status(401).json({ error: "Error found with auth0" });
+    }
+});
 
+app.get('/nutrition', requiresAuth(), (req, res) => {
+    res.send(JSON.stringify(req.oidc.user));
+  });
 
 app.use(express.static(REACT_BUILD_DIR));
 
