@@ -5,7 +5,7 @@ import Nutrition from "./nutritiondeatails";
 //import axios from 'axios';
 
 const FindFood = () => {
-  const [nutrtion, setNutrition] = useState(null);
+  const [nutrition, setNutrition] = useState(null);
 
   const getFoodNutrition = (e) => {
     e.preventDefault();
@@ -27,9 +27,9 @@ const FindFood = () => {
 
     <div className="HomeTitle">
       <h1 className="HomeTitle">Git healthy Nutrition Page</h1>
-      {JSON.stringify(nutrtion)}
+      {/* {JSON.stringify(nutrtion)} */}
       <SearchFood getFoodNutrition={getFoodNutrition} />
-      <Nutrition nutrtion={nutrtion} />
+      <Nutrition nutrition={nutrition} />
       <div>
       </div>
     </div>
