@@ -60,9 +60,16 @@ app.get('/api/login', async (req, res) => {
     }
 });
 
-app.get('/nutrition', requiresAuth(), (req, res) => {
+  
+
+//trying to redirect if autho notworking 
+app.get('/api/login', requiresAuth(), (req, res) => {
+    if(req.oidc.isAuthenticated({ returnTO: '/nutrtion'}))
     res.send(JSON.stringify(req.oidc.user));
   });
+
+
+
 
 app.use(express.static(REACT_BUILD_DIR));
 
