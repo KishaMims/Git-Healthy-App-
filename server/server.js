@@ -172,10 +172,6 @@ app.get('/api/login', (req, res) => {
 //     }
 // });
 
-
-
-
-
 app.use(express.static(REACT_BUILD_DIR));
 
 //create the get request
