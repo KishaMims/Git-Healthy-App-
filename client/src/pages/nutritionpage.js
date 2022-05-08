@@ -1,30 +1,39 @@
 import React from "react";
-import myHeaders from "./headertest";
 import SearchFood from "./searchfood";
+import { useState } from "react";
+import Nutrition from "./nutritiondeatails";
+//import axios from 'axios';
 
-function Nutrition() {
-  
-  
-// var myHeaders = new Headers();
-//   myHeaders.append("X-Api-Key", "qLTEP0kL+FQedNFT7fvs7A==5NU1hXtrsqifhB7C");
-  
-  var requestOptions = {
-    method: 'GET',
-    headers: myHeaders,
-    redirect: 'follow'
-  };
-  
-  fetch("https://api.calorieninjas.com/v1/nutrition?query=6oz steak", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
-  return ( 
+const FindFood = () => {
+  const [nutrtion, setNutrition] = useState(null);
+
+  const getFoodNutrition = (e) => {
+    e.preventDefault();
+    let food = e.target.elements.food.value;
+    console.log('food: ', food);
+    fetch(`/api/nutrition?food=${food}`, {
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setNutrition(data);
+        console.log('Food info here', data);
+      })
+      .catch(err => console.error(err));
+  }
+
+
+
+  return (
 
     <div className="HomeTitle">
-        <h1 className="HomeTitle">Git healthy nutrition page</h1>
-        <SearchFood/>
+      <h1 className="HomeTitle">Git healthy Nutrition Page</h1>
+      {JSON.stringify(nutrtion)}
+      <SearchFood getFoodNutrition={getFoodNutrition} />
+      <Nutrition nutrtion={nutrtion} />
+      <div>
+      </div>
     </div>
   )
 }
 
-export default Nutrition;
+export default FindFood;
