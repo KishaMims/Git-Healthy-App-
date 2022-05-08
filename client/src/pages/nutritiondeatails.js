@@ -1,7 +1,11 @@
 import React from 'react';
 import MealTime from './meals';
 
-export default function Nutrition (props) {
+
+
+function Nutrition (props) {
+  // const [food, setFood] = useState('');
+  // const [calories, setCalories] = useState = ('');
 
 
 const {nutrition} = props;
@@ -24,3 +28,5 @@ const {nutrition} = props;
     </div>
   )
 }
+
+export default Nutrition;

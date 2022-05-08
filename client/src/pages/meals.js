@@ -1,11 +1,15 @@
 import React from 'react';
 import { useState } from 'react';
 
-export default function MealTime(props) {
 
-  // const {nutrition} = props;
-  
-  const [mealcourse, SetMeal] = useState('');
+export default function MealTime (props) {
+
+
+const [mealcourse, SetMeal] = useState('');
+  // const [food, setFood] = useState('');
+  // const [calories, setCalories] = useState = ('');
+
+
 
   const handleChange = (e) => {
     SetMeal(e.target.value)
@@ -61,7 +65,9 @@ export default function MealTime(props) {
        <label>Snack</label><br></br>
        </form>
        <button type="submit">Save Meal</button>
+   
         </div>
+       
       );
     }
     
