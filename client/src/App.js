@@ -18,7 +18,7 @@ function App() {
       <Router>
         <Navbar/>
         <Routes>
-        <Route path='/login' element={<Login />}/>
+        <Route path='/login-logout' element={<Login />}/>
         {/* <Route path='/logout' element={<Login />}/> */}
           <Route path='/home' element={<Home />}/>
           <Route path='/about' element={<About/>}/>
@@ -28,7 +28,7 @@ function App() {
          {/* <Route path='/api/searchfood' element={<SearchFood/>}/> */}
          <Route path='/contact' element={<Contact/>}/>
         </Routes>
-        <Login/>
+        {/* <Login/> */}
       </Router>
      );
    }

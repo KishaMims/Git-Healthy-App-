@@ -24,12 +24,12 @@ export default function Login() {
     }, []);    
 
   return (
-      <nav>
+      <div>
         <ul>
             {!user ?(<li><a href="http://localhost:3001/login">Login</a></li>) 
             : (<li> Hello, {user.email}<a href="http://localhost:3001/logout">Logout</a></li>)
             }
         </ul>
-    </nav>
+    </div>
   )
 };

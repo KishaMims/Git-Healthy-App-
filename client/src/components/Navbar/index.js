@@ -28,6 +28,11 @@ const Navbar = () => {
           <NavLink to="/contact" activeStyle>
             Contact
           </NavLink>
+          <button>
+          <NavLink to="/login-logout" activeStyle>
+           Login/Logout
+          </NavLink>
+          </button>
         </NavMenu>
     </Nav>
     </>
