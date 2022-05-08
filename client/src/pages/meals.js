@@ -59,10 +59,6 @@ export default function MealTime(props) {
        >
        </input>
        <label>Snack</label><br></br>
-       {/* <button
-          type="reset"
-          onClick={resetRadioState}
-        /> */}
        </form>
        <button type="submit">Save Meal</button>
         </div>
