@@ -2,7 +2,7 @@ import React from "react";
 import SearchFood from "./searchfood";
 import { useState } from "react";
 import Nutrition from "./nutritiondeatails";
-//import axios from 'axios';
+
 
 const FindFood = () => {
   const [nutrition, setNutrition] = useState(null);

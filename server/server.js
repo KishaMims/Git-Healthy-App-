@@ -185,44 +185,66 @@ app.get('/api/login', requiresAuth(), (req, res) => {
 
 app.use(express.static(REACT_BUILD_DIR));
 
-//create the get request
-app.get('/api/students', cors(), async (req, res) => {
-
-    // const STUDENTS = [
-
-    //     { id: 1, firstName: 'Lisa', lastName: 'Lee' },
-    //     { id: 2, firstName: 'Eileen', lastName: 'Long' },
-    //     { id: 3, firstName: 'Fariba', lastName: 'Dako' },
-    //     { id: 4, firstName: 'Cristina', lastName: 'Rodriguez' },
-    //     { id: 5, firstName: 'Andrea', lastName: 'Trejo' },
-    // ];
-    // res.json(STUDENTS);
+//get user id from db
+app.get('/nutrition/user_id', cors(), async (req, res) => {
+    const { id } = req.params;
     try {
-        const { rows: students } = await db.query('SELECT * FROM students');
-        res.send(students);
+        const users = await db.query('SELECT * FROM users WHERE id = $1', [id]);
+        res.json(posts.rows[0]);
     } catch (e) {
-        console.log(e);
         return res.status(400).json({ e });
     }
 });
 
-//create the POST request
-app.post('/api/students', cors(), async (req, res) => {
-    const newUser = { firstname: req.body.firstname, lastname: req.body.lastname }
-    console.log([newUser.firstname, newUser.lastname]);
-    const result = await db.query(
-        'INSERT INTO students(firstname, lastname) VALUES($1, $2) RETURNING *',
-        [newUser.firstname, newUser.lastname]
+// get all the usermeals for the current day on login
+app.get('/api/nutrition/user_id', cors(), async (req, res) => {
+    try {
+        const meals = await db.query('SELECT * FROM meals WHERE user_id =$1 AND added_on =$2', [user_id, CURRENT_DATE]);
+        res.send(posts);
+    } catch (e) {
+        return res.status(400).json({ e });
+    }
+});
+
+
+//get weekly view of meals 
+app.get('/api/nutrition/user_id', cors(), async (req, res) => {
+    try {
+        const meals = await db.query('SELECT * FROM meals WHERE id =$1 AND added_on =$2 AND =$3', [id, startdate, enddate]);
+        res.send(posts);
+    } catch (e) {
+        return res.status(400).json({ e });
+    }
+});
+
+//get a single user meal 
+app.get('/api/nutrition/user_id/meal', cors(), async (req, res) => {
+    try {
+        const meals = await db.query('SELECT * FROM meals WHERE user_id =$1 AND food_eaten =$2 AND meal_course=$3 AND added_on=$3', [id, food_eaten, meal_course, added_on]);
+        res.send(posts);
+    } catch (e) {
+        return res.status(400).json({ e });
+    }
+});
+
+
+
+// post request for meal by user 
+app.post('/api/nutrition/user_id', cors(), async (req, res) => {
+    const {added_on, food_eaten, calories, meal_course, user_id } = req.bodyl
+    const newMealPost = await db.query(
+        'INSERT INTO meals(added_on, food_eaten, calories, meal_course, user_id) VALUES($1, $2, $3, $4, $5) RETURNING *',
+        [added_on, food_eaten, calories, meal_course, user_id]
     );
     console.log(result.rows[0]);
     res.json(result.rows[0]);
 });
 
 // delete request
-app.delete('/api/students/:studentId', cors(), async (req, res) => {
-    const studentId = req.params.studentId;
+app.delete('/api/nutrtion/user_id/meal', cors(), async (req, res) => {
+    const { id } = req.params
     //console.log(req.params);
-    await db.query('DELETE FROM students WHERE id=$1', [studentId]);
+    await db.query('DELETE FROM meals WHERE id=$1 AND food_eaten=$2 AND added_on=$3 ', [studentId]);
     res.status(200).end();
 
 });

@@ -2,27 +2,31 @@ import React from 'react';
 import { useState } from 'react';
 
 
-export default function MealTime (props) {
+export default function MealTime () {
+ 
 
 
+// const [food, setFood] = useState('');
+// const [calories, setCalories] = useState = ('');
+ //const { id } = useParams();
 const [mealcourse, SetMeal] = useState('');
-  // const [food, setFood] = useState('');
-  // const [calories, setCalories] = useState = ('');
+// const { data: meals, error } = useFetch(`http://localhost:5000/api/nutrition/${user_id}`);
+
+const handleChange = (e) => {
+  SetMeal(e.target.value)
+}
 
 
+// const handleChange = (e) => {
+//     const meal = { food_eaten, calories, meal_course, userid }
+//     fetch(`http://localhost:5000/api/nutrition/`
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify(meal)
+//   }).then(() => {
+// }   navigate('/nutrition/${user_id}')
+//
 
-  const handleChange = (e) => {
-    SetMeal(e.target.value)
-  }
 
-  // const resetRadioState = () => {
-  //   SetMeal('');
-  // }
-
-  // const [breakfast, setBreakfast] = useState('');
-  // const [lunch, setLunch] = useState('');
-  // const [dinner, setDinner] = useState('');
-  // const [snack, setSnack] = useState('');
 
   return (
         <div>
