@@ -201,7 +201,7 @@ app.use(express.static(REACT_BUILD_DIR));
 
 
 
-
+//get all users to info to get emails? to get id? 
 app.get('/api/all/nutrition', cors(), async (req, res) => {
     try {
         const { rows:users } = await db.query('SELECT * FROM users');
