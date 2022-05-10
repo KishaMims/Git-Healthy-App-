@@ -18,8 +18,8 @@ const handleChange = (e) => {
 
 
 // const handleChange = (e) => {
-//     const meal = { food_eaten, calories, meal_course, userid }
-//     fetch(`http://localhost:5000/api/nutrition/`
+//     const meal = { food_eaten, calories, meal_course, user_id }
+//     fetch(`http://localhost:5000/api/nutrition/user_id`
 //     headers: { 'Content-Type': 'application/json' },
 //     body: JSON.stringify(meal)
 //   }).then(() => {

@@ -7,9 +7,10 @@ import Exercises from "./pages/exercise";
 import About from "./pages/about";
 import FindFood from "./pages/nutritionpage";
 import Recipes from "./pages/recipe";
-//import SearchFood from "./pages/searchfood";
 import Login from "./pages/login";
 import Contact from "./pages/contact";
+import UserView from "./pages/userview";
+
 
 
 
@@ -18,7 +19,7 @@ function App() {
       <Router>
         <Navbar/>
         <Routes>
-        <Route path='/login-logout' element={<Login />}/>
+        <Route path='/api/login' element={<Login />}/>
         {/* <Route path='/logout' element={<Login />}/> */}
           <Route path='/home' element={<Home />}/>
           <Route path='/about' element={<About/>}/>
@@ -27,6 +28,7 @@ function App() {
          <Route path='/recipes' element={<Recipes/>}/>
          {/* <Route path='/api/searchfood' element={<SearchFood/>}/> */}
          <Route path='/contact' element={<Contact/>}/>
+         <Route path='/api/nutrition/user_id' element={<UserView/>}/>
         </Routes>
         {/* <Login/> */}
       </Router>

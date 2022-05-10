@@ -3,7 +3,11 @@ import { Nav, NavLink, NavMenu } from "./NavBarElements.js";
 import image from './logo.jpg';
 
 
+
+
 const Navbar = () => {
+  
+   
     return (
     <> 
     <Nav>
@@ -28,11 +32,6 @@ const Navbar = () => {
           <NavLink to="/contact" activeStyle>
             Contact
           </NavLink>
-          <button>
-          <NavLink to="/login-logout" activeStyle>
-           Login/Logout
-          </NavLink>
-          </button>
         </NavMenu>
     </Nav>
     </>
