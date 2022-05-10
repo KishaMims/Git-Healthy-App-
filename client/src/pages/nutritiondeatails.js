@@ -2,9 +2,6 @@ import React from 'react';
 import MealTime from './meals';
 
 
-
-
-
 function Nutrition (props) {
   // const [food, setFood] = useState('');
   // const [calories, setCalories] = useState = ('');
