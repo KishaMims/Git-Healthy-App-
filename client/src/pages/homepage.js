@@ -1,7 +1,7 @@
 
 import React from "react";
 import Login from "./login";
-import UserView from "./userview";
+// import UserView from "./userview";
 
 
 
@@ -32,7 +32,7 @@ function Home () {
         <div className="homepage">
             <h2 className="HomeTitle"> Git Helathy Home Page </h2>
             <Login/>
-            <UserView/>
+            {/* <UserView/> */}
             </div>
       
     )

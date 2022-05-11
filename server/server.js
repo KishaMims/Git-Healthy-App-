@@ -122,9 +122,35 @@ var requestOptions = {
     headers: myHeaders,
 };
 
+
+
+
+//get user logged in meals
+app.get('/api/meals', async (req, res) => {
+    // console.log('log line 182', req);
+    console.log('log of 131', req.oidc.isAuthenticated());
+    console.log('log line 132', req.oidc.user);
+    if (!req.oidc.isAuthenticated()) { 
+      res.status(401).json({ error: 'User not logged in'})
+    }
+
+    if (req.oidc.isAuthenticated()) {
+    const currentuser = await db.query(`SELECT * FROM users WHERE email ='${req.oidc.user.email}'`);
+    console.log('user info line 157', currentuser)
+    console.log('user info line 189', currentuser.id);
+    const usermeals = await db.query('SELECT * FROM meals WHERE userid = $1', [currentuser.id]);
+    console.log('meal info', usermeals);
+  
+     return res.json(usermeals);
+    }    
+})
+
+
+
 app.get('/api/nutrition', cors(), async (req, res) => {
     food = req.query.food;
     console.log('req.query:', req.query);
+    console.log('log of 128', req.oidc.isAuthenticated());
     console.log('food:', food);
     const url = `https://api.calorieninjas.com/v1/nutrition?query=${food}`;
     try {
@@ -144,6 +170,7 @@ app.get('/api/nutrition', cors(), async (req, res) => {
 });
 
 
+
 //creates an endpoint for the user authinticated
 // app.get('/api/login', (req, res) => {
 //     console.log("Hello",req.oidc.user);
@@ -157,13 +184,13 @@ app.get('/api/nutrition', cors(), async (req, res) => {
 
 // doing db query insert for user info
 app.get('/api/login', async (req, res) => {
-    console.log(req.oidc.isAuthenticated());
-    console.log(req.oidc.user);
+    console.log('this is line 160', req.oidc.isAuthenticated());
+    console.log('this is line 161', req.oidc.user);
     if (req.oidc.isAuthenticated()) {
         const search = await db.query(
             `SELECT * FROM users WHERE email='${req.oidc.user.email}'`
         )
-        // console.log('search results', search.rows[0]);
+        console.log('search results for line 166', search.rows[0]);
         if(search.rows.length === 0 ){
         const createUser = await db.query ('INSERT INTO users(name, nickname, email) VALUES($1, $2, $3) RETURNING *', [req.oidc.user.name, req.oidc.user.nickname, req.oidc.user.email]
         )
@@ -176,29 +203,26 @@ app.get('/api/login', async (req, res) => {
 });
 
 //trying to get signed in users meals from db
-app.use(express.static(REACT_BUILD_DIR));
+// app.use(express.static(REACT_BUILD_DIR));
 
-app.get('/api/users/nutrition', async (req, res) => {
 
-    if (!req.oidc.isAuthenticated()) { 
-      res.status(401).json({ error: 'User not logged in'})
-    }
 
-    if (req.oidc.isAuthenticated()) {
-    const current_user = await db.query(`SELECT * FROM users WHERE email ='${req.oidc.user.email}'`);
-    console.log('user info', current_user);
-    const user_meals = await db.query('SELECT * FROM meals WHER user_id = $1', current_user.id);
-  
-     return res.json(user_meals);
-    }    
-})
+// //all users
+// app.get('/api/nutrition/users', cors(), async (req, res) => {
+//     try {
+//         const { rows: users } = await db.query('SELECT * FROM users');
+//         res.send(users);
+//     } catch (e) {
+//         return res.status(400).json({ e });
+//     }
+// });
 
 
 
 // get all the usermeals for the current day on login
-// app.get('/api/nutrition/userview', cors(), async (req, res) => {
+// app.get('/api/nutrition/users', cors(), async (req, res) => {
 //     try {
-//         const meals = await db.query('SELECT * FROM meals WHERE user_id =$1 AND added_on =$2', [user_id, CURRENT_DATE]);
+//         const allusers = await db.query('SELECT * FROM users WHERE user_id =$1 AND added_on =$2', [user_id, CURRENT_DATE]);
 //         res.send(posts);
 //     } catch (e) {
 //         return res.status(400).json({ e });
