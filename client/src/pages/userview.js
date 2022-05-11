@@ -15,7 +15,6 @@ const [usermeals, setUserMeals] = useState([]);
         .then(usermeals => {
             setUserMeals(usermeals);
         }
-
         )
        
 }, []);
