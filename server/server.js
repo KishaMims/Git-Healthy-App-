@@ -8,7 +8,6 @@ const fetch = require('node-fetch');
 require('dotenv').config()
 const { auth, requiresAuth  } = require('express-openid-connect');
 const db = require('../server/db/db-connection.js'); 
-const { resolveNaptr } = require('dns');
 const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 const app = express();
 
@@ -100,7 +99,7 @@ app.use(express.json());
 app.get('/', (req, res) => {
     const d = new Date();
     res.json({ currentTime: d.toTimeString() });
-    console.log('I am on line 103');
+    console.log('I am on line 114');
     console.log(req.oidc.isAuthenticated());
     res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
 });
@@ -122,53 +121,26 @@ var requestOptions = {
     headers: myHeaders,
 };
 
-
-
-
-//get user logged in meals
-app.get('/api/meals', async (req, res) => {
-    // console.log('log line 182', req);
-    console.log('log of 131', req.oidc.isAuthenticated());
-    console.log('log line 132', req.oidc.user);
-    if (!req.oidc.isAuthenticated()) { 
-      res.status(401).json({ error: 'User not logged in'})
+app.get('/api/nutrition', cors(), async (req, res) => {
+    food = req.query.food;
+    console.log('req.query:', req.query);
+    console.log('food:', food);
+    const url = `https://api.calorieninjas.com/v1/nutrition?query=${food}`;
+    try {
+      const response = await fetch(url, requestOptions);
+      const data = await response.json();
+      console.log('food info here', data);
+      res.send(data);
+    } catch (err) {
+      console.error("Fetch error: ", err);
     }
-
-    if (req.oidc.isAuthenticated()) {
-    const currentuser = await db.query(`SELECT * FROM users WHERE email ='${req.oidc.user.email}'`);
-    // console.log('user info line 139', currentuser)
-    console.log('user info line 140', currentuser.rows[0].id);
-    const usermeals = await db.query('SELECT * FROM meals WHERE userid = $1', [currentuser.rows[0].id]);
-    console.log('meal info', usermeals);
-  
-     return res.json(usermeals.rows);
-    }    
-})
-
-
-
-// app.get('/api/nutrition', cors(), async (req, res) => {
-//     food = req.query.food;
-//     console.log('req.query:', req.query);
-//     console.log('log of 128', req.oidc.isAuthenticated());
-//     console.log('food:', food);
-//     const url = `https://api.calorieninjas.com/v1/nutrition?query=${food}`;
-//     try {
-//       const response = await fetch(url, requestOptions);
-//       const data = await response.json();
-//       console.log('food info here', data);
-//       res.send(data);
-//     } catch (err) {
-//       console.error("Fetch error: ", err);
-//     }
-//     // fetch(`https://api.calorieninjas.com/v1/nutrition?query=${food}`, requestOptions)
-//     //     .then(res => { return res.json(); })
-//     //     .then(data => {
-//     //         console.log("data from fetch:", data)
-//     //        res.json(data);
-//     //   })
-// });
-
+    // fetch(`https://api.calorieninjas.com/v1/nutrition?query=${food}`, requestOptions)
+    //     .then(res => { return res.json(); })
+    //     .then(data => {
+    //         console.log("data from fetch:", data)
+    //        res.json(data);
+    //   })
+});
 
 
 //creates an endpoint for the user authinticated
@@ -184,13 +156,13 @@ app.get('/api/meals', async (req, res) => {
 
 // doing db query insert for user info
 app.get('/api/login', async (req, res) => {
-    console.log('this is line 187', req.oidc.isAuthenticated());
-    console.log('this is line 188', req.oidc.user);
+    console.log(req.oidc.isAuthenticated());
+    console.log(req.oidc.user);
     if (req.oidc.isAuthenticated()) {
         const search = await db.query(
             `SELECT * FROM users WHERE email='${req.oidc.user.email}'`
         )
-        console.log('search results for line 193', search.rows[0]);
+        console.log('search results', search.rows[0]);
         if(search.rows.length === 0 ){
         const createUser = await db.query ('INSERT INTO users(name, nickname, email) VALUES($1, $2, $3) RETURNING *', [req.oidc.user.name, req.oidc.user.nickname, req.oidc.user.email]
         )
@@ -202,27 +174,12 @@ app.get('/api/login', async (req, res) => {
     }
 });
 
-//trying to get signed in users meals from db
-// app.use(express.static(REACT_BUILD_DIR));
-
-
-
-// // //all users
-// app.get('/api/users', cors(), async (req, res) => {
-//     try {
-//         const { rows: users } = await db.query('SELECT * FROM users');
-//         res.send(users);
-//     } catch (e) {
-//         return res.status(400).json({ e });
-//     }
-// });
-
 
 
 // get all the usermeals for the current day on login
-// app.get('/api/nutrition/users', cors(), async (req, res) => {
+// app.get('/api/nutrition/user_id', cors(), async (req, res) => {
 //     try {
-//         const allusers = await db.query('SELECT * FROM users WHERE user_id =$1 AND added_on =$2', [user_id, CURRENT_DATE]);
+//         const meals = await db.query('SELECT * FROM meals WHERE user_id =$1 AND added_on =$2', [user_id, CURRENT_DATE]);
 //         res.send(posts);
 //     } catch (e) {
 //         return res.status(400).json({ e });
@@ -234,45 +191,36 @@ app.get('/api/login', async (req, res) => {
 
 
 //trying to redirect if autho notworking 
-
-// app.get('/api/login', requiresAuth(), (req, res) => {
-//     if(req.oidc.isAuthenticated({ returnTO: '/api/nutrition/user_id'}))
-//     res.send(JSON.stringify(req.oidc.user));
-//   });
-
+app.get('/api/login', requiresAuth(), (req, res) => {
+    if(req.oidc.isAuthenticated({ returnTO: '/api/nutrition/user_id'}))
+    res.send(JSON.stringify(req.oidc.user));
+  });
 
 
-//get all users to info to get emails? to get id? 
-// if(req.oidc.isAuthenticated()) 
+app.use(express.static(REACT_BUILD_DIR));
 
 
-// app.get('/api/users/nutrition', cors(), async (req, res) => {
-//     if (req.oidc.isAuthenticated()) {
-//         const current_user = await db.query (
-//             `SELECT * FROM users WHERE email='${req.oidc.user.email}'`
-//         )
-//         const user_meals = await db.query('SELECT * FROM meals WHERE user_id=$1', [current_user.id]);
-        
-//     if (!req.oidc.isAuthenticated()) {
-//         res.status(401).json({ error: 'User is not logged in' })
-    
-//         res.json(user_meals);
-//     }      
-//         }
-// });
 
 
+app.get('/api/all/nutrition', cors(), async (req, res) => {
+    try {
+        const { rows:users } = await db.query('SELECT * FROM users');
+        res.send(users);
+    } catch (e) {
+        return res.status(400).json({ e });
+    }
+});
 
 //get user id from db
-// app.get('/api/nutrition/email', cors(), async (req, res) => {
-//     const { email } = req.params;
-//     try {
-//         const users = await db.query('SELECT * FROM users WHERE email = $1', [email]);
-//         res.json(users.rows[0]);
-//     } catch (e) {
-//         return res.status(400).json({ e });
-//     }
-// });
+app.get('/api/nutrition/email', cors(), async (req, res) => {
+    const { email } = req.params;
+    try {
+        const users = await db.query('SELECT * FROM users WHERE email = $1', [email]);
+        res.json(users.rows[0]);
+    } catch (e) {
+        return res.status(400).json({ e });
+    }
+});
 
 // get all the usermeals for the current day on login
 // app.get('/api/nutrition/user_id', cors(), async (req, res) => {
@@ -298,7 +246,7 @@ app.get('/api/login', async (req, res) => {
 //get a single user meal 
 // app.get('/api/nutrition/user_id/meal', cors(), async (req, res) => {
 //     try {
-//         const meals = await db.query('SELECT * FROM meals WHERE user_id =$1 AND food_eaten =$2 AND meal_course=$3 AND added_on=$3', [user_id, food_eaten, meal_course, added_on]);
+//         const meals = await db.query('SELECT * FROM meals WHERE user_id =$1 AND food_eaten =$2 AND meal_course=$3 AND added_on=$3', [id, food_eaten, meal_course, added_on]);
 //         res.send(posts);
 //     } catch (e) {
 //         return res.status(400).json({ e });
@@ -309,7 +257,7 @@ app.get('/api/login', async (req, res) => {
 
 // post request for meal by user 
 // app.post('/api/nutrition/user_id', cors(), async (req, res) => {
-//     const {added_on, food_eaten, calories, meal_course, user_id } = req.body
+//     const {added_on, food_eaten, calories, meal_course, user_id } = req.bodyl
 //     const newMealPost = await db.query(
 //         'INSERT INTO meals(added_on, food_eaten, calories, meal_course, user_id) VALUES($1, $2, $3, $4, $5) RETURNING *',
 //         [added_on, food_eaten, calories, meal_course, user_id]
