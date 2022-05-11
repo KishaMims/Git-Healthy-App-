@@ -95,11 +95,12 @@ app.use(express.json());
 // });
 
 
+
 //creates an endpoint for the route /api
 app.get('/', (req, res) => {
     const d = new Date();
     res.json({ currentTime: d.toTimeString() });
-    console.log('I am on line 114');
+    console.log('I am on line 103');
     console.log(req.oidc.isAuthenticated());
     res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
 });
@@ -120,6 +121,29 @@ myHeaders.append("X-Api-Key", process.env.CALORIENINJAAPIKEY);
 var requestOptions = {
     headers: myHeaders,
 };
+
+
+
+
+//get user logged in meals
+app.get('/api/meals', async (req, res) => {
+    console.log('log of 131', req.oidc.isAuthenticated());
+    console.log('log line 132', req.oidc.user);
+    if (!req.oidc.isAuthenticated()) { 
+      res.status(401).json({ error: 'User not logged in'})
+    }
+
+    if (req.oidc.isAuthenticated()) {
+    const currentuser = await db.query(`SELECT * FROM users WHERE email ='${req.oidc.user.email}'`);
+    // console.log('user info line 139', currentuser)
+    console.log('user info line 140', currentuser.rows[0].id);
+    const usermeals = await db.query('SELECT * FROM meals WHERE userid = $1', [currentuser.rows[0].id]);
+    console.log('meal info', usermeals);
+
+     return res.json(usermeals.rows);
+    }    
+})
+
 
 app.get('/api/nutrition', cors(), async (req, res) => {
     food = req.query.food;

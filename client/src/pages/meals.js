@@ -9,13 +9,26 @@ export default function MealTime () {
 // const [food, setFood] = useState('');
 // const [calories, setCalories] = useState = ('');
  //const { id } = useParams();
-const [mealcourse, SetMeal] = useState('');
+const [mealeaten, SetMeal] = useState('');
 // const { data: meals, error } = useFetch(`http://localhost:5000/api/nutrition/${user_id}`);
 
 const handleChange = (e) => {
   SetMeal(e.target.value)
 }
 
+
+
+// const handleChange = (e) => {
+//   SetMeal(e.target.value);
+//   const mealeaten = { food_eaten, mealcourse, user_id };
+//   fetch('http://localhost:5000/', {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify(mealeaten)
+//   }).then(() => {
+//       navigate('/nutrtion');
+//   })
+// }
 
 // const handleChange = (e) => {
 //     const meal = { food_eaten, calories, meal_course, user_id }
@@ -35,7 +48,7 @@ const handleChange = (e) => {
        type="radio" 
        className="mealcourse" 
        value='Breakfast'
-       checked={mealcourse === 'Breakfast'}
+       checked={mealeaten === 'Breakfast'}
        onClick={handleChange}
        >
        </input>
@@ -44,7 +57,7 @@ const handleChange = (e) => {
        type="radio" 
        className="mealcourse" 
        value='Lunch'
-       checked={mealcourse === 'Lunch'}
+       checked={mealeaten === 'Lunch'}
        onClick={handleChange}
        >
        </input>
@@ -53,7 +66,7 @@ const handleChange = (e) => {
        type="radio"
        className="mealcourse"
        value='Dinner'
-       checked={mealcourse === 'Dinner'}
+       checked={mealeaten === 'Dinner'}
        onClick={handleChange}
        >
        </input>
@@ -62,7 +75,7 @@ const handleChange = (e) => {
        type="radio"
        className="mealcourse" 
        value='Snack'
-       checked={mealcourse === 'Snack'}
+       checked={mealeaten === 'Snack'}
        onClick={handleChange}
        >
        </input>
