@@ -100,7 +100,7 @@ app.use(express.json());
 app.get('/', (req, res) => {
     const d = new Date();
     res.json({ currentTime: d.toTimeString() });
-    console.log('I am on line 114');
+    console.log('I am on line 103');
     console.log(req.oidc.isAuthenticated());
     res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
 });
@@ -136,38 +136,38 @@ app.get('/api/meals', async (req, res) => {
 
     if (req.oidc.isAuthenticated()) {
     const currentuser = await db.query(`SELECT * FROM users WHERE email ='${req.oidc.user.email}'`);
-    console.log('user info line 157', currentuser)
-    console.log('user info line 189', currentuser.id);
-    const usermeals = await db.query('SELECT * FROM meals WHERE userid = $1', [currentuser.id]);
+    // console.log('user info line 139', currentuser)
+    console.log('user info line 140', currentuser.rows[0].id);
+    const usermeals = await db.query('SELECT * FROM meals WHERE userid = $1', [currentuser.rows[0].id]);
     console.log('meal info', usermeals);
   
-     return res.json(usermeals);
+     return res.json(usermeals.rows);
     }    
 })
 
 
 
-app.get('/api/nutrition', cors(), async (req, res) => {
-    food = req.query.food;
-    console.log('req.query:', req.query);
-    console.log('log of 128', req.oidc.isAuthenticated());
-    console.log('food:', food);
-    const url = `https://api.calorieninjas.com/v1/nutrition?query=${food}`;
-    try {
-      const response = await fetch(url, requestOptions);
-      const data = await response.json();
-      console.log('food info here', data);
-      res.send(data);
-    } catch (err) {
-      console.error("Fetch error: ", err);
-    }
-    // fetch(`https://api.calorieninjas.com/v1/nutrition?query=${food}`, requestOptions)
-    //     .then(res => { return res.json(); })
-    //     .then(data => {
-    //         console.log("data from fetch:", data)
-    //        res.json(data);
-    //   })
-});
+// app.get('/api/nutrition', cors(), async (req, res) => {
+//     food = req.query.food;
+//     console.log('req.query:', req.query);
+//     console.log('log of 128', req.oidc.isAuthenticated());
+//     console.log('food:', food);
+//     const url = `https://api.calorieninjas.com/v1/nutrition?query=${food}`;
+//     try {
+//       const response = await fetch(url, requestOptions);
+//       const data = await response.json();
+//       console.log('food info here', data);
+//       res.send(data);
+//     } catch (err) {
+//       console.error("Fetch error: ", err);
+//     }
+//     // fetch(`https://api.calorieninjas.com/v1/nutrition?query=${food}`, requestOptions)
+//     //     .then(res => { return res.json(); })
+//     //     .then(data => {
+//     //         console.log("data from fetch:", data)
+//     //        res.json(data);
+//     //   })
+// });
 
 
 
@@ -184,13 +184,13 @@ app.get('/api/nutrition', cors(), async (req, res) => {
 
 // doing db query insert for user info
 app.get('/api/login', async (req, res) => {
-    console.log('this is line 160', req.oidc.isAuthenticated());
-    console.log('this is line 161', req.oidc.user);
+    console.log('this is line 187', req.oidc.isAuthenticated());
+    console.log('this is line 188', req.oidc.user);
     if (req.oidc.isAuthenticated()) {
         const search = await db.query(
             `SELECT * FROM users WHERE email='${req.oidc.user.email}'`
         )
-        console.log('search results for line 166', search.rows[0]);
+        console.log('search results for line 193', search.rows[0]);
         if(search.rows.length === 0 ){
         const createUser = await db.query ('INSERT INTO users(name, nickname, email) VALUES($1, $2, $3) RETURNING *', [req.oidc.user.name, req.oidc.user.nickname, req.oidc.user.email]
         )
@@ -207,8 +207,8 @@ app.get('/api/login', async (req, res) => {
 
 
 
-// //all users
-// app.get('/api/nutrition/users', cors(), async (req, res) => {
+// // //all users
+// app.get('/api/users', cors(), async (req, res) => {
 //     try {
 //         const { rows: users } = await db.query('SELECT * FROM users');
 //         res.send(users);

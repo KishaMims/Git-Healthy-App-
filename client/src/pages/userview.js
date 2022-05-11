@@ -9,10 +9,10 @@ const [usermeals, setUserMeals] = useState([]);
   const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
 
   useEffect(() => {
-    fetch('api/meals')
+    fetch('/api/meals')
        .then((response) => response.json())
-        .then(data => {
-            setUserMeals(data.response.usermeals);
+        .then(usermeals => {
+            setUserMeals(usermeals);
         }
 
         )

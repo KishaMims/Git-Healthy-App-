@@ -1,6 +1,7 @@
-import React from 'react'
-
-export default function allusers() {
+import React from 'react';
+import { useEffect, useState } from "react";
+export default function Allusers() {
+const [users, setUser] = useState(undefined);
 
     useEffect(() => {
         fetch('http://localhost:3001/api/nutrition/users')
@@ -15,6 +16,8 @@ export default function allusers() {
     }, []);
 
   return (
-    <div>allusers</div>
+    <div>allusers
+   <>{JSON.stringify(users)}</>
+    </div>
   )
 }
