@@ -28,7 +28,7 @@ function App() {
          <Route path='/recipes' element={<Recipes/>}/>
          {/* <Route path='/api/searchfood' element={<SearchFood/>}/> */}
          <Route path='/contact' element={<Contact/>}/>
-         <Route path='/api/meals' element={<UserView/>}/>
+         <Route path='/api/nutrition/user_id' element={<UserView/>}/>
         </Routes>
         {/* <Login/> */}
       </Router>
