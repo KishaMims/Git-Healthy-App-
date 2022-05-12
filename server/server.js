@@ -114,12 +114,12 @@ app.post("/api/searchfood", (req, res) => {
   });
 
 // GET request for the food item searched
-var myHeaders = new Headers();
-myHeaders.append("X-Api-Key", process.env.CALORIENINJAAPIKEY);
+const headers = {
+  "X-Api-Key": process.env.CALORIENINJAAPIKEY,
+};
 
-
-var requestOptions = {
-    headers: myHeaders,
+const requestOptions = {
+  headers,
 };
 
 
