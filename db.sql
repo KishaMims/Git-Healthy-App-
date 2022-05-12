@@ -17,7 +17,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: meals_id_seq; Type: SEQUENCE; Schema: public; Owner: tpl_1121_13
+-- Name: meals_id_seq; Type: SEQUENCE; Schema: public; Owner: deanmoraites
 --
 
 CREATE SEQUENCE public.meals_id_seq
@@ -28,14 +28,14 @@ CREATE SEQUENCE public.meals_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.meals_id_seq OWNER TO tpl_1121_13;
+ALTER TABLE public.meals_id_seq OWNER TO deanmoraites;
 
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
 --
--- Name: meals; Type: TABLE; Schema: public; Owner: tpl_1121_13
+-- Name: meals; Type: TABLE; Schema: public; Owner: deanmoraites
 --
 
 CREATE TABLE public.meals (
@@ -48,10 +48,10 @@ CREATE TABLE public.meals (
 );
 
 
-ALTER TABLE public.meals OWNER TO tpl_1121_13;
+ALTER TABLE public.meals OWNER TO deanmoraites;
 
 --
--- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: tpl_1121_13
+-- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: deanmoraites
 --
 
 CREATE SEQUENCE public.user_id_seq
@@ -62,10 +62,10 @@ CREATE SEQUENCE public.user_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.user_id_seq OWNER TO tpl_1121_13;
+ALTER TABLE public.user_id_seq OWNER TO deanmoraites;
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: tpl_1121_13
+-- Name: users; Type: TABLE; Schema: public; Owner: deanmoraites
 --
 
 CREATE TABLE public.users (
@@ -77,10 +77,10 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO tpl_1121_13;
+ALTER TABLE public.users OWNER TO deanmoraites;
 
 --
--- Data for Name: meals; Type: TABLE DATA; Schema: public; Owner: tpl_1121_13
+-- Data for Name: meals; Type: TABLE DATA; Schema: public; Owner: deanmoraites
 --
 
 COPY public.meals (id, addedon, foodeaten, calories, mealcourse, userid) FROM stdin;
@@ -116,7 +116,7 @@ COPY public.meals (id, addedon, foodeaten, calories, mealcourse, userid) FROM st
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: tpl_1121_13
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: deanmoraites
 --
 
 COPY public.users (id, name, email, nickname, created) FROM stdin;
@@ -128,21 +128,21 @@ COPY public.users (id, name, email, nickname, created) FROM stdin;
 
 
 --
--- Name: meals_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tpl_1121_13
+-- Name: meals_id_seq; Type: SEQUENCE SET; Schema: public; Owner: deanmoraites
 --
 
 SELECT pg_catalog.setval('public.meals_id_seq', 42, true);
 
 
 --
--- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tpl_1121_13
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: deanmoraites
 --
 
 SELECT pg_catalog.setval('public.user_id_seq', 9, true);
 
 
 --
--- Name: meals meals_pkey; Type: CONSTRAINT; Schema: public; Owner: tpl_1121_13
+-- Name: meals meals_pkey; Type: CONSTRAINT; Schema: public; Owner: deanmoraites
 --
 
 ALTER TABLE ONLY public.meals
@@ -150,7 +150,7 @@ ALTER TABLE ONLY public.meals
 
 
 --
--- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: tpl_1121_13
+-- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: deanmoraites
 --
 
 ALTER TABLE ONLY public.users
@@ -158,7 +158,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: tpl_1121_13
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: deanmoraites
 --
 
 ALTER TABLE ONLY public.users
@@ -166,7 +166,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: meals user_id; Type: FK CONSTRAINT; Schema: public; Owner: tpl_1121_13
+-- Name: meals user_id; Type: FK CONSTRAINT; Schema: public; Owner: deanmoraites
 --
 
 ALTER TABLE ONLY public.meals

@@ -1,27 +1,18 @@
 import React from "react";
 import { useState, useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
 import MealTime from './meals';
 
-
 function Nutrition (props) {
-
-  // const {nutrition } = props;
   const { nutrition } = props;
   const [food, setFood] = useState('');
   const [calories, setCalories] = useState('');
-  // const [mealeaten, SetMeal] = useState('');
-  // const navigate = useNavigate();
-useEffect(()=>
-{
+
+useEffect(()=> {
   if(nutrition) {
-  setFood(nutrition.items[0].name);
-  setCalories(nutrition.items[0].calories);
+    setFood(nutrition.items[0].name);
+    setCalories(nutrition.items[0].calories);
   }
 },[nutrition])
-
-
-
 
   return (
     <div className='nutrtion_info'>
