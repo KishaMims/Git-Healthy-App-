@@ -55,6 +55,13 @@ return (
     </li>)}
     </ul>
      <button onClick={handleClick}>Add Meal</button>
+     <Datepicker
+    controls={['calendar']}
+    select="preset-range"
+    firstSelectDay={1}
+    selectSize={7}
+/>
+     <button>View Week</button>
     <MealTime usermeals={usermeals.id}/>
   </div>
   

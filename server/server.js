@@ -126,23 +126,23 @@ var requestOptions = {
 
 
 //get all of  of the user logged in meals
-// app.get('/api/userview', async (req, res) => {
-//     console.log('log of 131', req.oidc.isAuthenticated());
-//     console.log('log line 132', req.oidc.user);
-//     if (!req.oidc.isAuthenticated()) { 
-//       res.status(401).json({ error: 'User not logged in'})
-//     }
+app.get('/api/userview/all', async (req, res) => {
+    console.log('log of 131', req.oidc.isAuthenticated());
+    console.log('log line 132', req.oidc.user);
+    if (!req.oidc.isAuthenticated()) { 
+      res.status(401).json({ error: 'User not logged in'})
+    }
 
-//     if (req.oidc.isAuthenticated()) {
-//     const currentuser = await db.query(`SELECT * FROM users WHERE email ='${req.oidc.user.email}'`);
-//     // console.log('user info line 139', currentuser)
-//     console.log('user info line 140', currentuser.rows[0].id);
-//     const usermeals = await db.query('SELECT * FROM meals WHERE userid = $1', [currentuser.rows[0].id]);
-//     console.log('meal info', usermeals);
+    if (req.oidc.isAuthenticated()) {
+    const currentuser = await db.query(`SELECT * FROM users WHERE email ='${req.oidc.user.email}'`);
+    // console.log('user info line 139', currentuser)
+    console.log('user info line 140', currentuser.rows[0].id);
+    const usermeals = await db.query('SELECT * FROM meals WHERE userid = $1', [currentuser.rows[0].id]);
+    console.log('meal info', usermeals);
 
-//      return res.json(usermeals.rows);
-//     }    
-// })
+     return res.json(usermeals.rows);
+    }    
+})
 
 
 // get for the current meals added today 
@@ -292,6 +292,26 @@ app.get('/api/nutrition/email', cors(), async (req, res) => {
     }
 });
 
+
+
+
+// post request for meal by user 
+app.post('/api/setmeals', cors(), async (req, res) => {
+    try {
+    const {foodeaten, calories, mealcourse, userid } = req.body
+    const newMealPost = await db.query(
+        "INSERT INTO meals(foodeaten, calories, mealcourse, userid) VALUES($1, $2, $3, $4) RETURNING *",
+        [foodeaten, calories, mealcourse, userid]
+    );
+    res.json(newMealPost.rows[0]);
+    } catch (error){
+        console.log(error.message); 
+    }
+});
+
+
+
+
 // get all the usermeals for the current day on login
 // app.get('/api/nutrition/user_id', cors(), async (req, res) => {
 //     try {
@@ -325,19 +345,7 @@ app.get('/api/nutrition/email', cors(), async (req, res) => {
 
 
 
-// post request for meal by user 
-app.post('/api/setmeals', cors(), async (req, res) => {
-    try {
-    const {foodeaten, calories, mealcourse, userid } = req.body
-    const newMealPost = await db.query(
-        "INSERT INTO meals(foodeaten, calories, mealcourse, userid) VALUES($1, $2, $3, $4) RETURNING *",
-        [foodeaten, calories, mealcourse, userid]
-    );
-    res.json(newMealPost.rows[0]);
-    } catch (error){
-        console.log(error.message); 
-    }
-});
+
 
 // delete request
 // app.delete('/api/nutrtion/user_id/meal', cors(), async (req, res) => {

@@ -1,18 +1,29 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+
 
 
 export default function MealTime (props) {
  
 
-const {calories, userid, food} = props;
+const {calories, food } = props;
 
 
 const [mealcourse, SetMeal] = useState('');
+const [data, setData] = useState([]);
 const navigate = useNavigate();
 
- 
+useEffect(() => {
+  fetch('/api/userview/all')
+     .then((response) => response.json())
+      .then(data => {
+          setData(data);
+      }
+
+      )
+     
+}, []);
 
 // const handleChange = (e) => {
 //   SetMeal(e.currentTarget.value);
@@ -26,9 +37,11 @@ const navigate = useNavigate();
 //   })
 // }
 
+
+
 const handleChange = (e) => {
   SetMeal(e.target.value)
-  const dailymeal = { foodeaten:food, calories:calories, mealcourse:mealcourse, userid:userid};
+  const dailymeal = { foodeaten:food, calories:calories, mealcourse:mealcourse};
   fetch('http://localhost:3000/api/setmeals', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -44,9 +57,12 @@ const handleChange = (e) => {
 
 
 
-
   return (
+    
     <div>
+      <div>
+            {JSON.stringify(data)}
+        </div>
     <form onClick={handleChange}>
      <input 
      type="radio" 
