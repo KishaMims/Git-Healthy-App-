@@ -20,8 +20,8 @@ const Navbar = () => {
           <NavLink to="/home" activeStyle>
             Home
           </NavLink>
-          <NavLink to="/api/nutrition" activeStyle>
-            Nutrition
+          <NavLink to="/api/userview" activeStyle>
+            Meals
           </NavLink>
           <NavLink to="/exercise" activeStyle>
             Exercises

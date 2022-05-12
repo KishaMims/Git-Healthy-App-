@@ -1,8 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from "react";
 // import Nutrition from './nutritiondeatails';
-import MealTime from './meals';
+// import MealTime from './meals';
 // import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
+import MealTime from './meals';
+
 
 
 const UserView = ()=> {
@@ -10,8 +13,8 @@ const UserView = ()=> {
   // const [users, setUser] = useState(undefined);
   const current = new Date();
   const date = `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
-
-  // const [userid, setUserId] = useState([]);
+  const navigate = useNavigate();
+  
 
 
 
@@ -21,7 +24,6 @@ const UserView = ()=> {
        .then((response) => response.json())
         .then(usermeals => {
             setUserMeals(usermeals);
-            // setUserId(usermeals.userid);
         }
 
         )
@@ -35,21 +37,25 @@ const UserView = ()=> {
 // ,[userid]);
 // console.log([userid]);
 
-
+const handleClick = () => {
+  navigate(`/api/nutrition`)
+}
 return (
   <div className="App">
     <h1>Your Daily Nutrition Summary</h1>
     <h1>{date}</h1>
     <div>
-            {JSON.stringify(usermeals)}
+            {/* {JSON.stringify(usermeals)} */}
         </div>
-    {/* <ul>
+     
+    <ul>
     {usermeals.map((meal, index) =>
     <li className='list' key={index}> <br /> 
-      <h2>{meal.foodeaten}</h2><br /> {meal.calories}<br /> {meal.course} <br /> <br />Added on: {moment(meal.addedon).format('MM/DD/YYYY')} <></><br />
+      <h2>{meal.mealcourse}</h2><br /> {meal.foodeaten}<br /> {meal.calories}<br />
     </li>)}
-    </ul> */}
-    <MealTime userid={usermeals.userid}/>
+    </ul>
+     <button onClick={handleClick}>Add Meal</button>
+    <MealTime usermeals={usermeals.id}/>
   </div>
   
 );

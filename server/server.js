@@ -125,7 +125,27 @@ var requestOptions = {
 
 
 
-//get all   of the user logged in meals
+//get all of  of the user logged in meals
+// app.get('/api/userview', async (req, res) => {
+//     console.log('log of 131', req.oidc.isAuthenticated());
+//     console.log('log line 132', req.oidc.user);
+//     if (!req.oidc.isAuthenticated()) { 
+//       res.status(401).json({ error: 'User not logged in'})
+//     }
+
+//     if (req.oidc.isAuthenticated()) {
+//     const currentuser = await db.query(`SELECT * FROM users WHERE email ='${req.oidc.user.email}'`);
+//     // console.log('user info line 139', currentuser)
+//     console.log('user info line 140', currentuser.rows[0].id);
+//     const usermeals = await db.query('SELECT * FROM meals WHERE userid = $1', [currentuser.rows[0].id]);
+//     console.log('meal info', usermeals);
+
+//      return res.json(usermeals.rows);
+//     }    
+// })
+
+
+// get for the current meals added today 
 app.get('/api/userview', async (req, res) => {
     console.log('log of 131', req.oidc.isAuthenticated());
     console.log('log line 132', req.oidc.user);
@@ -137,33 +157,12 @@ app.get('/api/userview', async (req, res) => {
     const currentuser = await db.query(`SELECT * FROM users WHERE email ='${req.oidc.user.email}'`);
     // console.log('user info line 139', currentuser)
     console.log('user info line 140', currentuser.rows[0].id);
-    const usermeals = await db.query('SELECT * FROM meals WHERE userid = $1', [currentuser.rows[0].id]);
+    const usermeals = await db.query('SELECT * FROM meals WHERE userid = $1 AND addedon=CURRENT_DATE', [currentuser.rows[0].id]);
     console.log('meal info', usermeals);
 
      return res.json(usermeals.rows);
     }    
 })
-
-
-// trying to pass in date into db meals query
-// app.get('/api/meals', async (req, res) => {
-//     console.log('log of 131', req.oidc.isAuthenticated());
-//     console.log('log line 132', req.oidc.user);
-//     if (!req.oidc.isAuthenticated()) { 
-//       res.status(401).json({ error: 'User not logged in'})
-//     }
-
-//     if (req.oidc.isAuthenticated()) {
-//     const currentuser = await db.query(`SELECT * FROM users WHERE email ='${req.oidc.user.email}'`);
-//     // console.log('user info line 139', currentuser)
-//     console.log('user info line 140', currentuser.rows[0].id);
-//     const usermeals = await db.query('SELECT * FROM meals WHERE userid = $1 AND addedon= $2', [currentuser.rows[0].id, GETDATE()]);
-//     console.log('meal info', usermeals);
-
-//      return res.json(usermeals.rows);
-//     }    
-// })
-
 
 
 

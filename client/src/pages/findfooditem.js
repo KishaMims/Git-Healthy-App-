@@ -2,6 +2,7 @@ import React from "react";
 import SearchFood from "./searchfood";
 import { useState } from "react";
 import Nutrition from "./nutritiondeatails";
+// import MealTime from "./meals";
 
 
 
@@ -28,7 +29,6 @@ const FindFood = () => {
 
     <div className="HomeTitle">
       <h1 className="HomeTitle">Git healthy Nutrition Page</h1>
-      {/* {JSON.stringify(nutrtion)} */}
       <SearchFood getFoodNutrition={getFoodNutrition} />
       <Nutrition nutrition={nutrition} />
       <div>

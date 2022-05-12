@@ -1,15 +1,17 @@
 import React from "react";
 import { useState, useEffect } from 'react';
+// import { useNavigate } from 'react-router-dom';
 import MealTime from './meals';
 
 
 function Nutrition (props) {
 
-  // const {nutrition, userid } = props;
+  // const {nutrition } = props;
   const { nutrition } = props;
   const [food, setFood] = useState('');
   const [calories, setCalories] = useState('');
-
+  // const [mealeaten, SetMeal] = useState('');
+  // const navigate = useNavigate();
 useEffect(()=>
 {
   if(nutrition) {
@@ -17,7 +19,6 @@ useEffect(()=>
   setCalories(nutrition.items[0].calories);
   }
 },[nutrition])
-
 
 
 
@@ -35,8 +36,7 @@ useEffect(()=>
          <span>Total Carbohydrates:{nutrition.items[0].carbohydrates_total_g}</span>
       </p>
      )}
-     <MealTime food={food} calories={calories}/>
-
+     <MealTime food={food} calories={calories}/> 
     </div>
   )
 }
