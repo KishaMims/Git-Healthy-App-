@@ -125,8 +125,8 @@ var requestOptions = {
 
 
 
-//get user logged in meals
-app.get('/api/meals', async (req, res) => {
+//get all   of the user logged in meals
+app.get('/api/userview', async (req, res) => {
     console.log('log of 131', req.oidc.isAuthenticated());
     console.log('log line 132', req.oidc.user);
     if (!req.oidc.isAuthenticated()) { 
@@ -145,6 +145,53 @@ app.get('/api/meals', async (req, res) => {
 })
 
 
+// trying to pass in date into db meals query
+// app.get('/api/meals', async (req, res) => {
+//     console.log('log of 131', req.oidc.isAuthenticated());
+//     console.log('log line 132', req.oidc.user);
+//     if (!req.oidc.isAuthenticated()) { 
+//       res.status(401).json({ error: 'User not logged in'})
+//     }
+
+//     if (req.oidc.isAuthenticated()) {
+//     const currentuser = await db.query(`SELECT * FROM users WHERE email ='${req.oidc.user.email}'`);
+//     // console.log('user info line 139', currentuser)
+//     console.log('user info line 140', currentuser.rows[0].id);
+//     const usermeals = await db.query('SELECT * FROM meals WHERE userid = $1 AND addedon= $2', [currentuser.rows[0].id, GETDATE()]);
+//     console.log('meal info', usermeals);
+
+//      return res.json(usermeals.rows);
+//     }    
+// })
+
+
+
+
+
+
+// //testing for a post 
+// app.post('/api/meals', async (req, res) => {
+//     console.log('log of 131', req.oidc.isAuthenticated());
+//     console.log('log line 132', req.oidc.user);
+//     if (!req.oidc.isAuthenticated()) { 
+//       res.status(401).json({ error: 'User not logged in'})
+//     }
+
+//     if (req.oidc.isAuthenticated()) {
+//     const loggedinuser = await db.query(`SELECT * FROM users WHERE email ='${req.oidc.user.email}'`);
+//     // console.log('user info line 139', currentuser)
+//     console.log('user info line 140', currentuser.rows[0].id);
+//     const mealeaten = await db.query('INSERT * meals(foodeaten, calories, mealcourse, userid VALUES($1, $2, $3) RETURNING *'[title, recipecontent, textcontent, category]
+//     );/
+//     console.log('meal info', usermeals);
+
+//      return res.json(usermeals.rows);
+//     }    
+// })
+
+
+
+// food nutrition fetch 
 app.get('/api/nutrition', cors(), async (req, res) => {
     food = req.query.food;
     console.log('req.query:', req.query);
@@ -226,14 +273,14 @@ app.use(express.static(REACT_BUILD_DIR));
 
 
 
-app.get('/api/all/nutrition', cors(), async (req, res) => {
-    try {
-        const { rows:users } = await db.query('SELECT * FROM users');
-        res.send(users);
-    } catch (e) {
-        return res.status(400).json({ e });
-    }
-});
+// app.get('/api/all/nutrition', cors(), async (req, res) => {
+//     try {
+//         const { rows:users } = await db.query('SELECT * FROM users');
+//         res.send(users);
+//     } catch (e) {
+//         return res.status(400).json({ e });
+//     }
+// });
 
 //get user id from db
 app.get('/api/nutrition/email', cors(), async (req, res) => {
@@ -280,15 +327,18 @@ app.get('/api/nutrition/email', cors(), async (req, res) => {
 
 
 // post request for meal by user 
-// app.post('/api/nutrition/user_id', cors(), async (req, res) => {
-//     const {added_on, food_eaten, calories, meal_course, user_id } = req.bodyl
-//     const newMealPost = await db.query(
-//         'INSERT INTO meals(added_on, food_eaten, calories, meal_course, user_id) VALUES($1, $2, $3, $4, $5) RETURNING *',
-//         [added_on, food_eaten, calories, meal_course, user_id]
-//     );
-//     console.log(result.rows[0]);
-//     res.json(result.rows[0]);
-// });
+app.post('/api/setmeals', cors(), async (req, res) => {
+    try {
+    const {foodeaten, calories, mealcourse, userid } = req.body
+    const newMealPost = await db.query(
+        "INSERT INTO meals(foodeaten, calories, mealcourse, userid) VALUES($1, $2, $3, $4) RETURNING *",
+        [foodeaten, calories, mealcourse, userid]
+    );
+    res.json(newMealPost.rows[0]);
+    } catch (error){
+        console.log(error.message); 
+    }
+});
 
 // delete request
 // app.delete('/api/nutrtion/user_id/meal', cors(), async (req, res) => {

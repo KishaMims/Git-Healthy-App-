@@ -1,16 +1,25 @@
-import React from 'react';
+import React from "react";
+import { useState, useEffect } from 'react';
 import MealTime from './meals';
 
 
-
-
-
 function Nutrition (props) {
-  // const [food, setFood] = useState('');
-  // const [calories, setCalories] = useState = ('');
+
+  // const {nutrition, userid } = props;
+  const { nutrition } = props;
+  const [food, setFood] = useState('');
+  const [calories, setCalories] = useState('');
+
+useEffect(()=>
+{
+  if(nutrition) {
+  setFood(nutrition.items[0].name);
+  setCalories(nutrition.items[0].calories);
+  }
+},[nutrition])
 
 
-const {nutrition} = props;
+
 
 
   return (
@@ -26,7 +35,7 @@ const {nutrition} = props;
          <span>Total Carbohydrates:{nutrition.items[0].carbohydrates_total_g}</span>
       </p>
      )}
-     <MealTime/>
+     <MealTime food={food} calories={calories}/>
 
     </div>
   )

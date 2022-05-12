@@ -1,43 +1,34 @@
 import React from 'react';
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 
-export default function MealTime () {
+export default function MealTime (props) {
  
 
+const {calories, userid, food} = props;
 
-// const [food, setFood] = useState('');
-// const [calories, setCalories] = useState = ('');
- //const { id } = useParams();
+
 const [mealeaten, SetMeal] = useState('');
-// const { data: meals, error } = useFetch(`http://localhost:5000/api/nutrition/${user_id}`);
+const navigate = useNavigate();
+
+ 
 
 const handleChange = (e) => {
-  SetMeal(e.target.value)
+  SetMeal(e.target.value);
+  const dailymeal = { foodeaten:food, calories:calories, mealcourse:mealeaten, userid};
+  fetch('http://localhost:3000/api/setmeals', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dailymeal)
+  }).then(() => {
+    navigate('/api/userview');
+  })
 }
 
 
 
-// const handleChange = (e) => {
-//   SetMeal(e.target.value);
-//   const mealeaten = { food_eaten, mealcourse, user_id };
-//   fetch('http://localhost:5000/', {
-//       method: 'POST',
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify(mealeaten)
-//   }).then(() => {
-//       navigate('/nutrtion');
-//   })
-// }
 
-// const handleChange = (e) => {
-//     const meal = { food_eaten, calories, meal_course, user_id }
-//     fetch(`http://localhost:5000/api/nutrition/user_id`
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify(meal)
-//   }).then(() => {
-// }   navigate('/nutrition/${user_id}')
-//
 
 
 
@@ -48,7 +39,6 @@ const handleChange = (e) => {
        type="radio" 
        className="mealcourse" 
        value='Breakfast'
-       checked={mealeaten === 'Breakfast'}
        onClick={handleChange}
        >
        </input>
@@ -57,7 +47,6 @@ const handleChange = (e) => {
        type="radio" 
        className="mealcourse" 
        value='Lunch'
-       checked={mealeaten === 'Lunch'}
        onClick={handleChange}
        >
        </input>
@@ -66,7 +55,6 @@ const handleChange = (e) => {
        type="radio"
        className="mealcourse"
        value='Dinner'
-       checked={mealeaten === 'Dinner'}
        onClick={handleChange}
        >
        </input>
@@ -75,7 +63,6 @@ const handleChange = (e) => {
        type="radio"
        className="mealcourse" 
        value='Snack'
-       checked={mealeaten === 'Snack'}
        onClick={handleChange}
        >
        </input>

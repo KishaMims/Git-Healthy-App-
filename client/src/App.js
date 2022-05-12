@@ -10,6 +10,7 @@ import Recipes from "./pages/recipe";
 import Login from "./pages/login";
 import Contact from "./pages/contact";
 import UserView from "./pages/userview";
+import MealTime from "./pages/meals";
 
 
 
@@ -26,9 +27,9 @@ function App() {
           <Route path='/api/nutrition' element={<FindFood/>}/>
          <Route path='/exercise' element={<Exercises/>}/>
          <Route path='/recipes' element={<Recipes/>}/>
-         {/* <Route path='/api/searchfood' element={<SearchFood/>}/> */}
          <Route path='/contact' element={<Contact/>}/>
-         <Route path='/api/meals' element={<UserView/>}/>
+         <Route path='/api/userview' element={<UserView/>}/>
+         <Route path='/api/setmeals' element={<MealTime/>}/>
         </Routes>
         {/* <Login/> */}
       </Router>
