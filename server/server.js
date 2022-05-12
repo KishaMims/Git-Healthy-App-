@@ -127,19 +127,13 @@ const requestOptions = {
 
 //get all of  of the user logged in meals
 app.get('/api/userview/all', async (req, res) => {
-    console.log('log of 131', req.oidc.isAuthenticated());
-    console.log('log line 132', req.oidc.user);
     if (!req.oidc.isAuthenticated()) { 
       res.status(401).json({ error: 'User not logged in'})
     }
 
     if (req.oidc.isAuthenticated()) {
     const currentuser = await db.query(`SELECT * FROM users WHERE email ='${req.oidc.user.email}'`);
-    // console.log('user info line 139', currentuser)
-    console.log('user info line 140', currentuser.rows[0].id);
     const usermeals = await db.query('SELECT * FROM meals WHERE userid = $1', [currentuser.rows[0].id]);
-    console.log('meal info', usermeals);
-
      return res.json(usermeals.rows);
     }    
 })
@@ -147,18 +141,13 @@ app.get('/api/userview/all', async (req, res) => {
 
 // get for the current meals added today 
 app.get('/api/userview', async (req, res) => {
-    console.log('log of 131', req.oidc.isAuthenticated());
-    console.log('log line 132', req.oidc.user);
     if (!req.oidc.isAuthenticated()) { 
       res.status(401).json({ error: 'User not logged in'})
     }
 
     if (req.oidc.isAuthenticated()) {
     const currentuser = await db.query(`SELECT * FROM users WHERE email ='${req.oidc.user.email}'`);
-    // console.log('user info line 139', currentuser)
-    console.log('user info line 140', currentuser.rows[0].id);
     const usermeals = await db.query('SELECT * FROM meals WHERE userid = $1 AND addedon=CURRENT_DATE', [currentuser.rows[0].id]);
-    console.log('meal info', usermeals);
 
      return res.json(usermeals.rows);
     }    
@@ -297,13 +286,21 @@ app.get('/api/nutrition/email', cors(), async (req, res) => {
 
 // post request for meal by user 
 app.post('/api/setmeals', cors(), async (req, res) => {
-    try {
-    const {foodeaten, calories, mealcourse, userid } = req.body
-    const newMealPost = await db.query(
-        "INSERT INTO meals(foodeaten, calories, mealcourse, userid) VALUES($1, $2, $3, $4) RETURNING *",
-        [foodeaten, calories, mealcourse, userid]
+    if (!req.oidc.isAuthenticated()) {
+        return res.status(401).json({ error: 'user not logged in '})
+    }
+    const currentUserQueryResult = await db.query(
+        `SELECT * FROM users WHERE email ='${req.oidc.user.email}'`
     );
-    res.json(newMealPost.rows[0]);
+    const currentUser = currentUserQueryResult.rows[0];
+
+    try {
+        const {foodeaten, calories, mealcourse} = req.body
+        const newMealPost = await db.query(
+            "INSERT INTO meals(foodeaten, calories, mealcourse, userid) VALUES($1, $2, $3, $4) RETURNING *",
+            [foodeaten, calories, mealcourse, currentUser.id]
+        );
+        res.json(newMealPost.rows[0]);
     } catch (error){
         console.log(error.message); 
     }
