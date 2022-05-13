@@ -30,10 +30,12 @@ const navigateToAddMeal = () => {
 
 
 let meals = {};
+let totalCalories = 0;
 
 usermeals.forEach((entry) => {
   meals[entry.mealcourse] = meals[entry.mealcourse] || {};
   meals[entry.mealcourse][entry.foodeaten] = Number(entry.calories);
+  totalCalories += Number(entry.calories)
 });
 
 return (
@@ -92,6 +94,14 @@ return (
   </>
 
   }
+
+{meals.Calories && 
+  <>
+    </>
+  }
+   <h2>Total Calories: </h2>
+   {totalCalories}<br/>
+
   <button onClick={navigateToAddMeal}>Add Meal</button>
   </div>
 );
