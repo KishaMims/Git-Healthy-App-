@@ -7,7 +7,7 @@ function SearchFood(props) {
     <form className="search-food-form" onSubmit={props.getFoodNutrition}>
             <input type="text" name="food" placeholder="Enter your meal"/>
             <br/>
-            <button> Check food nutrtion </button>
+            <button> Search </button>
 
         </form>
 

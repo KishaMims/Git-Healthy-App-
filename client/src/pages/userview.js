@@ -42,67 +42,69 @@ return (
   <div className="App">
     <h1>Your Daily Nutrition Summary</h1>
     <h1>{date}</h1>
+   
     {meals.Breakfast &&
   <>
     <h2>Breakfast</h2>
     <ul>
       {
         Object.entries(meals.Breakfast).map((food) => {
-          return (<li>{food[0]}: {food[1]}</li>);
+          return (<li>{food[0]} CAL:{food[1]}</li>);
         })
       }
     </ul>
   </>
 
-  }
+  } <button> Delete </button>
     {meals.Lunch &&
   <>
     <h2>Lunch</h2>
     <ul>
       {
         Object.entries(meals.Lunch).map((food) => {
-          return (<li>{food[0]}: {food[1]}</li>);
+          return (<li>{food[0]} CAL:{food[1]}</li>);
         })
       }
     </ul>
   </>
 
-  }
+  } <button> Delete </button>
     {meals.Dinner &&
   <>
     <h2>Dinner</h2>
     <ul>
       {
         Object.entries(meals.Dinner).map((food) => {
-          return (<li>{food[0]}: {food[1]}</li>);
+          return (<li>{food[0]} CAL:{food[1]}</li>);
         })
       }
     </ul>
   </>
 
-  }
+  } <button> Delete </button>
     {meals.Snacks &&
   <>
     <h2>Snacks</h2>
     <ul>
       {
         Object.entries(meals.Snacks).map((food) => {
-          return (<li>{food[0]}: {food[1]}</li>);
+          return (<li>{food[0]} CAL:{food[1]}</li>);
         })
       }
     </ul>
   </>
-
+ 
   }
-
+<button> Delete </button>
 {meals.Calories && 
   <>
     </>
   }
    <h2>Total Calories: </h2>
    {totalCalories}<br/>
-
-  <button onClick={navigateToAddMeal}>Add Meal</button>
+   <h2> Have you eaten today?</h2>
+  <button onClick={navigateToAddMeal}>Add Meal</button><br/>
+  <br/><button>View Week</button>
   </div>
 );
 }

@@ -17,7 +17,7 @@ useEffect(()=> {
   return (
     <div className='nutrtion_info'>
     {!nutrition ? (<h2 className='checking'>
-     {" "}Have you eaten today?{" "}</h2>) : (
+     {" "}Check your food's nutrition{" "}</h2>) : (
       <p>
          <span>Food:{nutrition.items[0].name}</span>
          <span>Total Grams of Fat:{nutrition.items[0].at_total_g}</span>
