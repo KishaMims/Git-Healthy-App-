@@ -28,7 +28,7 @@ const navigateToAddMeal = () => {
   navigate(`/api/nutrition`)
 }
 
-
+//unsure how to add id back in here need them for delete all need to to have as keys ??
 let meals = {};
 let totalCalories = 0;
 
