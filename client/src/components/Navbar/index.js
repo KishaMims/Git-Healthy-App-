@@ -5,9 +5,9 @@ import image from './logo.jpg';
 
 
 
+
+
 const Navbar = () => {
-  
-   
     return (
     <> 
     <Nav>
@@ -20,18 +20,18 @@ const Navbar = () => {
           <NavLink to="/home" activeStyle>
             Home
           </NavLink>
-          <NavLink to="/api/userview" activeStyle>
-            Meals
-          </NavLink>
-          <NavLink to="/exercise" activeStyle>
-            Exercises
-          </NavLink>
-          <NavLink to="/recipes" activeStyle>
-            Recipes
-          </NavLink>
-          <NavLink to="/contact" activeStyle>
-            Contact
-          </NavLink>
+             
+               <NavLink to="/api/userview" activeStyle>
+                Meals
+                </NavLink>
+               
+                <NavLink to="/exercise" activeStyle>
+                  Exercises
+                </NavLink><NavLink to="/recipes" activeStyle>
+                  Recipes
+                </NavLink><NavLink to="/contact" activeStyle>
+                  Contact
+                </NavLink>
         </NavMenu>
     </Nav>
     </>

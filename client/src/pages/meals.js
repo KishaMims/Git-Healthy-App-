@@ -1,21 +1,13 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 export default function MealTime (props) {
 
   const {calories, food } = props;
-  const [mealCourse, setMealCourse] = useState('');
-  const [data, setData] = useState([]);
+  const [mealCourse, setMealCourse] = useState('');;
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetch('/api/userview/all')
-      .then((response) => response.json())
-      .then(data => {
-        setData(data);
-      })
-  }, []);
 
   const handleMealCourseChange = (e) => {
     setMealCourse(e.target.value)
@@ -36,7 +28,6 @@ export default function MealTime (props) {
   return (
     <div>
       <div>
-          {JSON.stringify(data)}
       </div>
       <form>
         <input 

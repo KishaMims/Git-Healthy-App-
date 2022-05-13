@@ -1,10 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from "react";
-// import Nutrition from './nutritiondeatails';
-// import MealTime from './meals';
-// import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
-import MealTime from './meals';
+
 
 
 
@@ -30,21 +27,73 @@ const UserView = ()=> {
 const navigateToAddMeal = () => {
   navigate(`/api/nutrition`)
 }
+
+
+let meals = {};
+
+usermeals.forEach((entry) => {
+  meals[entry.mealcourse] = meals[entry.mealcourse] || {};
+  meals[entry.mealcourse][entry.foodeaten] = Number(entry.calories);
+});
+
 return (
   <div className="App">
     <h1>Your Daily Nutrition Summary</h1>
     <h1>{date}</h1>
+    {meals.Breakfast &&
+  <>
+    <h2>Breakfast</h2>
     <ul>
-    {usermeals.map((meal, index) =>
-    <li className='list' key={index}> <br /> 
-      <h2>{meal.mealcourse}</h2><br /> {meal.foodeaten}<br /> {meal.calories}<br />
-    </li>)}
+      {
+        Object.entries(meals.Breakfast).map((food) => {
+          return (<li>{food[0]}: {food[1]}</li>);
+        })
+      }
     </ul>
-     <button onClick={navigateToAddMeal}>Add Meal</button>
-     <button>View Week</button>
-    <MealTime usermeals={usermeals.id}/>
+  </>
+
+  }
+    {meals.Lunch &&
+  <>
+    <h2>Lunch</h2>
+    <ul>
+      {
+        Object.entries(meals.Lunch).map((food) => {
+          return (<li>{food[0]}: {food[1]}</li>);
+        })
+      }
+    </ul>
+  </>
+
+  }
+    {meals.Dinner &&
+  <>
+    <h2>Dinner</h2>
+    <ul>
+      {
+        Object.entries(meals.Dinner).map((food) => {
+          return (<li>{food[0]}: {food[1]}</li>);
+        })
+      }
+    </ul>
+  </>
+
+  }
+    {meals.Snacks &&
+  <>
+    <h2>Snacks</h2>
+    <ul>
+      {
+        Object.entries(meals.Snacks).map((food) => {
+          return (<li>{food[0]}: {food[1]}</li>);
+        })
+      }
+    </ul>
+  </>
+
+  }
+  <button onClick={navigateToAddMeal}>Add Meal</button>
   </div>
-  
 );
 }
 
