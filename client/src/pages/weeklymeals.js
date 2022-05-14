@@ -1,19 +1,21 @@
 import React from 'react';
+import "react-modern-calendar-datepicker/lib/DatePicker.css";
+import { Calendar } from "react-modern-calendar-datepicker";
 
-function WeeklyMeals( { meals }) {
-    return (
+function WeeklyMeals( ) {
+const [selectedDayRange, setSelectedDayRange] = useState({from: null, to: null });
 
-    <div>
-        {meals.map(meal => (
-            <div className="card-body" key={user_id.id}>
-                <Link to={`/api/nutrition/${user_id.id}`}>
-                    <h2></h2>
-                </Link>
-                </div>
-        ))}
-    </div>
-    
-    )
-};
+
+// console.log(setSelectedDayRange); 
+return (
+        <Calendar
+          value={selectedDayRange}
+          onChange={setSelectedDayRange}
+          shouldHighlightWeekends
+        />
+      );
+    };
+
+
 
 export default WeeklyMeals;
