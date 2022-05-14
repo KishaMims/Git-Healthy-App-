@@ -30,6 +30,7 @@ function App() {
          <Route path='/contact' element={<Contact/>}/>
          <Route path='/api/userview' element={<UserView/>}/>
          <Route path='/api/setmeals' element={<MealTime/>}/>
+         <Route path='/api/userview/:foodId' element={<UserView/>}/>
         </Routes>
         {/* <Login/> */}
       </Router>
