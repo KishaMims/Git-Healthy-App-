@@ -8,15 +8,24 @@ const [selectedDayRange, setSelectedDayRange] = useState({from: null, to: null }
 
 
 
-// const handleSubmit = (e) => {
-//   e.preventDefault()
-//   const daterange = {selectedDayRange};
-//   fetch(http://localhost:3000/api/userview/weekly'),{
-//   method: 'GET',
 
-//   }
-// }
-// console.log(setSelectedDayRange); 
+
+
+const getWeek = (selectedDayRange) => {
+  fetch(`http://localhost:3000/api/userview/weekly/${selectedDayRange}`, {
+    method: 'GET'
+  }).then((response) => {
+        if (response.ok) {
+        }
+      },
+        (error) => {
+          alert(error);
+        }
+      )
+    };
+
+
+console.log(setSelectedDayRange); 
 return (
   <div>
    <Calendar
@@ -24,7 +33,7 @@ return (
           onChange={setSelectedDayRange}
           shouldHighlightWeekends
         />
-        <button>View Week</button>
+        <button className="weekview" onClick={() => getWeek(selectedDayRange)}>View Week</button>
       ); 
       </div>
 )

@@ -1,24 +1,25 @@
 import React from 'react'
  function RecipeList(props) {
 
-  const {recipelist} = props;
-//   const nutrients = recipelist.nutrients;
+  const { recipes } = props;
+ 
 
   return (
     <div>
-        {!recipelist ? (<h3 className="Hungry">
-          {" "}
-          Hungry? Find some healthy meals to make.{" "}
-        </h3>) : (
+        {!recipes ? (<h2 className='checking'>
+     {" "}Ready to eat? Search for a recipie.{" "}</h2>) : (
             <p>
-            
+             <section className="meals">
+             <h1>Recipes</h1>
       
-            <section className="meals">
-              {/* {recipelist.map(meal => {
-                return <Meal key={meal.id} meal={meal} />
-              })} */}
-              {JSON.stringify(recipelist)}
+              {JSON.stringify(recipes)}
             </section>
+            <section className="meals">
+        {/* {recipes.map(recipe => {
+          return <Meal key={recipe.id} {recipe.} />
+        })} */}
+         <span>Food:{recipes.week}</span>
+      </section>
             </p>
         )}
           </div>

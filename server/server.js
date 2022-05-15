@@ -202,34 +202,31 @@ app.post('/api/setmeals', cors(), async (req, res) => {
 
 
     //get weekly view of meals 
-    // app.get('/api/nutrition/user_id', cors(), async (req, res) => {
-    //     try {
-    //         const meals = await db.query('SELECT * FROM meals WHERE id =$1 AND added_on =$2 AND =$3', [id, startdate, enddate]);
-    //         res.send(posts);
-    //     } catch (e) {
-    //         return res.status(400).json({ e });
-    //     }
-    // });
+    app.get('/api/nutrition/weeklyview/:selectedrange', cors(), async (req, res) => {
+        const selectedDayRange = req.params.selectedDayRange
+        try {
+            const meals = await db.query('SELECT * FROM meals WHERE id =$1 AND added_on =$2 AND =$3', [id, startdate, enddate]);
+            res.send(meals);
+        } catch (e) {
+            return res.status(400).json({ e });
+        }
+    });
 
 
     //recipe fetch info 
 
 
-    // Create the post request for the Calories for Recipes 
+// calories post for recipes page  
 let calories;
 app.post("/api/search-calories", (req, res) => {
   calories = req.body.calories;
   res.redirect("/api/recipes");
 });
 
-
-
-https://api.spoonacular.com/mealplanner/generate?apiKey=9c56e4d69dfd4f8b81db725a6c6d2121&calories=3000
-// Make the GET request with the city (that it's the redirect from the user)
-
+// get request for recipes site 
 app.get("/api/recipes", cors(), async (req, res) => {
     calories = req.query.calories;
-     const url = `https://api.spoonacular.com/mealplanner/generate?apiKey=${process.env.SPOONTACULARAPIKEY}=${calories}`;
+     const url = `https://api.spoonacular.com/mealplanner/generate?apiKey=${process.env.SPOONTACULARAPIKEY}&calories=${calories}`;
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -239,31 +236,6 @@ app.get("/api/recipes", cors(), async (req, res) => {
       console.error("Fetch error: ", err);
     }
   });
-
-
-
-
-  
-    // Put request - Update request
-    app.put('/api/students/:studentId', cors(), async (req, res) => {
-        const studentId = req.params.studentId;
-        const updateStudent = { id: req.body.id, firstname: req.body.firstname, lastname: req.body.lastname }
-        //console.log(req.params);
-        // UPDATE students SET lastname = 'TestMarch' WHERE id = 1;
-        console.log(studentId);
-        console.log(updateStudent);
-        const query = `UPDATE students SET lastname=$1, firstname=$2 WHERE id = ${studentId} RETURNING *`;
-        console.log(query);
-        const values = [updateStudent.lastname, updateStudent.firstname];
-        try {
-            const updated = await db.query(query, values);
-            console.log(updated.rows[0]);
-            res.send(updated.rows[0]);
-        } catch (e) {
-            console.log(e);
-            return res.status(400).json({ e });
-        }
-    });
 
     // console.log that your server is up and running
     app.listen(PORT, () => {
