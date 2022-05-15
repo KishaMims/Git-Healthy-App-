@@ -26,7 +26,7 @@ function App() {
           <Route path='/about' element={<About/>}/>
           <Route path='/api/nutrition' element={<FindFood/>}/>
          <Route path='/exercise' element={<Exercises/>}/>
-         <Route path='/recipes' element={<Recipes/>}/>
+         <Route path='/api/recipes' element={<Recipes/>}/>
          <Route path='/contact' element={<Contact/>}/>
          <Route path='/api/userview' element={<UserView/>}/>
          <Route path='/api/setmeals' element={<MealTime/>}/>

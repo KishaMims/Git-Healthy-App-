@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import WeeklyMeals from './weeklymeals';
 
 
 
@@ -135,7 +136,7 @@ const UserView = () => {
       <h2> Have you eaten today?</h2>
       <button onClick={navigateToAddMeal}>Add Meal</button><br />
       {/* <br/><button>View Week</button> */}
-
+<WeeklyMeals/>
     </div>
   );
 }

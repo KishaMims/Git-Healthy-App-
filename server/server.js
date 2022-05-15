@@ -30,72 +30,6 @@ app.use(auth(config));
 app.use(express.json());
 
 
-
-//axios with food inside already 
-// app.get('/test-dino', cors(), async (req, res) => {
-//     console.log('hi');
-//     console.log('env ', process.env);
-//     const result = await axios.get(
-//         'https://api.calorieninjas.com/v1/nutrition?query=onion', 
-//         {
-//             headers: {
-//                 'X-Api-Key': process.env.CALORIE_NINJA_API_KEY,
-//             },
-//         }
-//     )
-//     console.log('result ', result);
-
-//     res.status(200).end('ok');
-// });
-
-
-// fetch nodejs
-
-//  axios 
-// var reqoptions = {
-//   method: 'get',
-//   url: `https://api.calorieninjas.com/v1/nutrition?query=${food}`,
-//   headers: { 
-//     'X-Api-Key': process.env.CALORIENINJAAPIKEY
-//   }
-// };
-
-// axios(reqoptions)
-// .then(function (response) {
-//   console.log(JSON.stringify(response.data));
-// })
-// .catch(function (error) {
-//   console.log(error);
-// });
-
-
-
-// get request with the food item 
-// const makeUrl = (food) => {
-
-// return `https://api.calorieninjas.com/v1/nutrition?query=+${food}`
-
-// };
-
-// app.get('/api/nutrition', cors(), async (req, res) => {
-//     console.log('hi');
-//     const food = req.query.food;
-//     console.log('env ', process.env);
-//     const result = await axios.get(
-//          (makeUrl(food)),
-//         {
-//             headers: {
-//                 'X-Api-Key': process.env.CALORIE_NINJA_API_KEY
-//             },
-//         }
-//     )
-//     console.log('result ', result);
-//     res.send(response.data);
-//     res.status(200).end('ok');
-// });
-
-
-
 //creates an endpoint for the route /api
 app.get('/', (req, res) => {
     const d = new Date();
@@ -152,6 +86,20 @@ app.get('/api/userview', async (req, res) => {
         return res.json(usermeals.rows);
     }
 })
+
+
+// app.get('/api/userview', async (req, res) => {
+//     if (!req.oidc.isAuthenticated()) {
+//         res.status(401).json({ error: 'User not logged in' })
+//     }
+
+//     if (req.oidc.isAuthenticated()) {
+//         const currentuser = await db.query(`SELECT * FROM users WHERE email ='${req.oidc.user.email}'`);
+//         const userweeklymeal = await db.query('SELECT * FROM meals WHERE userid =$1 AND addedon BETWEEN=$2 AND=$3  ', [currentuser.rows[0].id, ]);
+
+//         return res.json(usermeals.rows);
+//     }
+// })
 
 
 // food nutrition fetch 
@@ -250,15 +198,7 @@ app.post('/api/setmeals', cors(), async (req, res) => {
     });
 
 
-    // get all the usermeals for the current day on login
-    // app.get('/api/nutrition/user_id', cors(), async (req, res) => {
-    //     try {
-    //         const meals = await db.query('SELECT * FROM meals WHERE user_id =$1 AND added_on =$2', [user_id, CURRENT_DATE]);
-    //         res.send(posts);
-    //     } catch (e) {
-    //         return res.status(400).json({ e });
-    //     }
-    // });
+ 
 
 
     //get weekly view of meals 
@@ -271,16 +211,34 @@ app.post('/api/setmeals', cors(), async (req, res) => {
     //     }
     // });
 
-    //get a single user meal 
-    // app.get('/api/nutrition/user_id/meal', cors(), async (req, res) => {
-    //     try {
-    //         const meals = await db.query('SELECT * FROM meals WHERE user_id =$1 AND food_eaten =$2 AND meal_course=$3 AND added_on=$3', [id, food_eaten, meal_course, added_on]);
-    //         res.send(posts);
-    //     } catch (e) {
-    //         return res.status(400).json({ e });
-    //     }
-    // });
 
+    //recipe fetch info 
+
+
+    // Create the post request for the Calories for Recipes 
+let calories;
+app.post("/api/search-calories", (req, res) => {
+  calories = req.body.calories;
+  res.redirect("/api/recipes");
+});
+
+
+
+https://api.spoonacular.com/mealplanner/generate?apiKey=9c56e4d69dfd4f8b81db725a6c6d2121&calories=3000
+// Make the GET request with the city (that it's the redirect from the user)
+
+app.get("/api/recipes", cors(), async (req, res) => {
+    calories = req.query.calories;
+     const url = `https://api.spoonacular.com/mealplanner/generate?apiKey=${process.env.SPOONTACULARAPIKEY}=${calories}`;
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log(data);
+      res.send(data);
+    } catch (err) {
+      console.error("Fetch error: ", err);
+    }
+  });
 
 
 
