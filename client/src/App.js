@@ -11,7 +11,8 @@ import Login from "./pages/login";
 import Contact from "./pages/contact";
 import UserView from "./pages/userview";
 import MealTime from "./pages/meals";
-
+import WeeklyMeals from "./pages/weeklymeals";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
@@ -31,10 +32,13 @@ function App() {
          <Route path='/api/userview' element={<UserView/>}/>
          <Route path='/api/setmeals' element={<MealTime/>}/>
          <Route path='/api/userview/:foodId' element={<UserView/>}/>
+         <Route path='/api/userview/weekly' element={<WeeklyMeals/>}/>
         </Routes>
         {/* <Login/> */}
       </Router>
      );
    }
+
+ 
 
 export default App;

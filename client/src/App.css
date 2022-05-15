@@ -40,3 +40,11 @@
 ul{
   list-style: none;
 }
+
+.food_details{
+ margin: 24px;
+ width: 18rem;
+}
+.food_details .card-header{
+  font-weight: 500;
+}

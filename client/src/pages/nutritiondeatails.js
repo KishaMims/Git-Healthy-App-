@@ -1,6 +1,10 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 import MealTime from './meals';
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import _ from 'lodash';
+
 
 function Nutrition (props) {
   const { nutrition } = props;
@@ -18,14 +22,16 @@ useEffect(()=> {
     <div className='nutrtion_info'>
     {!nutrition ? (<h2 className='checking'>
      {" "}Check your food's nutrition{" "}</h2>) : (
-      <p>
-         <span>Food:{nutrition.items[0].name}</span>
-         <span>Total Grams of Fat:{nutrition.items[0].at_total_g}</span>
-         <span>Total Sugar:{nutrition.items[0].sugar_g}</span>
-         <span>Total Calories:{nutrition.items[0].calories}</span>
-         <span>Total Grams of Protien:{nutrition.items[0].protien_g}</span>
-         <span>Total Carbohydrates:{nutrition.items[0].carbohydrates_total_g}</span>
-      </p>
+      <Card className="food_details">
+      <Card.Header>{_.upperFirst(nutrition.items[0].name)}</Card.Header>
+      <ListGroup variant="flush">
+        <ListGroup.Item>Total Grams of Fat: {nutrition.items[0].fat_total_g} g</ListGroup.Item>
+        <ListGroup.Item>Total Sugar: {nutrition.items[0].sugar_g} g</ListGroup.Item>
+        <ListGroup.Item>Total Calories: {nutrition.items[0].calories} g</ListGroup.Item>
+        <ListGroup.Item>Total Grams of Protein: {nutrition.items[0].protein_g} g</ListGroup.Item>
+        <ListGroup.Item>Total Carbohydrates: {nutrition.items[0].carbohydrates_total_g} g</ListGroup.Item>
+      </ListGroup>
+    </Card>
      )}
      <MealTime food={food} calories={calories}/> 
     </div>

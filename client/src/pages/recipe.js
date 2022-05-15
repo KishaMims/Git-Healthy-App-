@@ -7,12 +7,12 @@ function Recipes() {
 
 const [recipes, setRecipes] = useState(null);
 
-const getRecipes = (e) =>{
+const getRecipes = (e) => {
   e.preventDefault();
   let calories = e.target.elements.calories.value;
   console.log(calories);
   // add to request body
-  fetch(`/api/recipes?calories=${calories}`, {
+  fetch(`/api/recipes/targetCalories=${calories}`, {
       method: "get",
       headers: {"Content-Type": "application/json",
   },
