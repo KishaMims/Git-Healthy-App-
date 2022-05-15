@@ -81,12 +81,29 @@ app.get('/api/userview', async (req, res) => {
 
     if (req.oidc.isAuthenticated()) {
         const currentuser = await db.query(`SELECT * FROM users WHERE email ='${req.oidc.user.email}'`);
-        const usermeals = await db.query('SELECT * FROM meals WHERE userid = $1 AND addedon=CURRENT_DATE', [currentuser.rows[0].id]);
+        const usermeals = await db.query('SELECT * FROM meals WHERE userid=$1 AND addedon=CURRENT_DATE', [currentuser.rows[0].id]);
 
         return res.json(usermeals.rows);
     }
 })
 
+//db.any('SELECT * FROM users WHERE created < $1 AND active = $2', [new Date(), true])
+
+// testing hard set previous week
+// i want to do something like this here if this is possible 
+// SELECT * FROM meals where userid = '6' AND addedon > CURRENT_DATE - INTERVAL '7 days';
+app.get('/api/userview/weekly', async (req, res) => {
+    if (!req.oidc.isAuthenticated()) {
+        res.status(401).json({ error: 'User not logged in' })
+    }
+
+    if (req.oidc.isAuthenticated()) {
+        const loggedinuser = await db.query(`SELECT * FROM users WHERE email ='${req.oidc.user.email}'`);
+        const pastweek = await db.query('SELECT * FROM meals WHERE userid=$1 AND addedon > CURRENT_DATE + INTERVAL 7 DAYS', [loggedinuser.rows[0].id]);
+
+        return res.json(pastweek.rows);
+    }
+})
 
 // app.get('/api/userview', async (req, res) => {
 //     if (!req.oidc.isAuthenticated()) {
@@ -200,17 +217,17 @@ app.post('/api/setmeals', cors(), async (req, res) => {
 
  
 
-
+    // SELECT * FROM meals WHERE id =$1 AND added_on =$2 AND =$3'
     //get weekly view of meals 
-    app.get('/api/nutrition/weeklyview/:selectedrange', cors(), async (req, res) => {
-        const selectedDayRange = req.params.selectedDayRange
-        try {
-            const meals = await db.query('SELECT * FROM meals WHERE id =$1 AND added_on =$2 AND =$3', [id, startdate, enddate]);
-            res.send(meals);
-        } catch (e) {
-            return res.status(400).json({ e });
-        }
-    });
+    // app.get('/api/nutrition/weeklyview/:selectedrange', cors(), async (req, res) => {
+    //     const selectedDayRange = req.params.selectedDayRange
+    //     try {
+    //         const meals = await db.query('SELECT * FROM meals WHERE id =$1', [id, [selectedDayRange],
+    //         res.send(meals),
+    //     } catch (e) {
+    //         return res.status(400).json({ e });
+    //     }
+    // });
 
 
     //recipe fetch info 
@@ -219,14 +236,16 @@ app.post('/api/setmeals', cors(), async (req, res) => {
 // calories post for recipes page  
 let calories;
 app.post("/api/search-calories", (req, res) => {
-  calories = req.body.calories;
+    calories = req.body.calories;
   res.redirect("/api/recipes");
 });
 
+
+// https://api.spoonacular.com/mealplanner/generate?apiKey=${apikey}&timeFrame=day&targetCalories=${calories}
 // get request for recipes site 
 app.get("/api/recipes", cors(), async (req, res) => {
     calories = req.query.calories;
-     const url = `https://api.spoonacular.com/mealplanner/generate?apiKey=${process.env.SPOONTACULARAPIKEY}&calories=${calories}`;
+     const url = `https://api.spoonacular.com/mealplanner/generate?apiKey=${process.env.SPOONTACULARAPIKEY}timeFrame=day&targetCalories=${calories}`;
     try {
       const response = await fetch(url);
       const data = await response.json();
