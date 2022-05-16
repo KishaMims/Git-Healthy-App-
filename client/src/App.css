@@ -48,3 +48,12 @@ ul{
 .food_details .card-header{
   font-weight: 500;
 }
+.homepage {
+  background: url(homepage.jpeg) no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}
+.logo {
+  margin-left: 1rem;
+}

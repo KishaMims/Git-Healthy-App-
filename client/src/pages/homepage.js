@@ -1,6 +1,6 @@
 
 import React from "react";
-import Login from "./login";
+
 
 
 
@@ -30,7 +30,6 @@ function Home () {
     return (
         <div className="homepage">
             <h2 className="HomeTitle"> Git Helathy Home Page </h2>
-            <Login/>
             </div>
       
     )

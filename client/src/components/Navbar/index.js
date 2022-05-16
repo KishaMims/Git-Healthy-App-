@@ -37,20 +37,22 @@ useEffect(()=>{
     return (
     <> 
     <Nav>
+   
     <ul>
-        <NavMenu>
-        <img src={image} alt="logo" height={80} style={{ align: !'left' }} />
-        <h2 className="title-tag">Git Healthy</h2>
+        <NavMenu>   
+        <div className="logo">
+      <img className="logo" alt="greencarrotapple"src={image} style={{height:"80px"}} />
+        </div>
         <li>
           <NavLink to="/about" activeStyle>
             About
           </NavLink>
           </li>
-          <li>
+          {/* <li>
           <NavLink to="/home" activeStyle>
             Home
           </NavLink>
-          </li>
+          </li> */}
              { user && 
              <li className="hiddenLink">
                <NavLink to="/api/userview" activeStyle>

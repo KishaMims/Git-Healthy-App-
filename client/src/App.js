@@ -31,7 +31,7 @@ useEffect(()=>{
         <Routes>
         <Route path='/api/login' element={<Login />}/>
         {/* <Route path='/logout' element={<Login />}/> */}
-          <Route path='/home' element={<Home />}/>
+          <Route path='/' element={<Home />}/>
           <Route path='/about' element={<About/>}/>
           <Route path='/api/nutrition' element={<FindFood/>}/>
          <Route path='/exercise' element={<Exercises/>}/>

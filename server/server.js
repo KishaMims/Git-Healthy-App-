@@ -92,18 +92,18 @@ app.get('/api/userview', async (req, res) => {
 // testing hard set previous week
 // i want to do something like this here if this is possible 
 // SELECT * FROM meals where userid = '6' AND addedon > CURRENT_DATE - INTERVAL '7 days';
-app.get('/api/userview/weekly', async (req, res) => {
-    if (!req.oidc.isAuthenticated()) {
-        res.status(401).json({ error: 'User not logged in' })
-    }
+// app.get('/api/userview/weekly', async (req, res) => {
+//     if (!req.oidc.isAuthenticated()) {
+//         res.status(401).json({ error: 'User not logged in' })
+//     }
 
-    if (req.oidc.isAuthenticated()) {
-        const loggedinuser = await db.query(`SELECT * FROM users WHERE email ='${req.oidc.user.email}'`);
-        const pastweek = await db.query('SELECT * FROM meals WHERE userid=$1 AND addedon > CURRENT_DATE + INTERVAL 7 DAYS', [loggedinuser.rows[0].id]);
+//     if (req.oidc.isAuthenticated()) {
+//         const loggedinuser = await db.query(`SELECT * FROM users WHERE email ='${req.oidc.user.email}'`);
+//         const pastweek = await db.query('SELECT * FROM meals WHERE userid=$1 AND addedon > CURRENT_DATE + INTERVAL 7 DAYS', [loggedinuser.rows[0].id]);
 
-        return res.json(pastweek.rows);
-    }
-})
+//         return res.json(pastweek.rows);
+//     }
+// })
 
 // app.get('/api/userview', async (req, res) => {
 //     if (!req.oidc.isAuthenticated()) {
@@ -240,12 +240,11 @@ app.post("/api/search-calories", (req, res) => {
   res.redirect("/api/recipes");
 });
 
-
-// https://api.spoonacular.com/mealplanner/generate?apiKey=${apikey}&timeFrame=day&targetCalories=${calories}
+//https://api.spoonacular.com/mealplanner/generate?apiKey=9c56e4d69dfd4f8b81db725a6c6d2121&timeFrame=day&calories=3000
 // get request for recipes site 
 app.get("/api/recipes", cors(), async (req, res) => {
     calories = req.query.calories;
-     const url = `https://api.spoonacular.com/mealplanner/generate?apiKey=${process.env.SPOONTACULARAPIKEY}timeFrame=day&targetCalories=${calories}`;
+     const url = `https://api.spoonacular.com/mealplanner/generate?apiKey=${process.env.SPOONTACULARAPIKEY}&timeFrame=day&calories=${calories}`;
     try {
       const response = await fetch(url);
       const data = await response.json();
