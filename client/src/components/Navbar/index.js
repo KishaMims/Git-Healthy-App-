@@ -1,6 +1,6 @@
 import React from "react";
 import { Nav, NavLink, NavMenu } from "./NavBarElements.js";
-import image from './logo.jpg';
+import image from './greenbackgroundlogo.png';
 import { useState, useEffect } from "react";
 import Login from "../../pages/login.js";
 
@@ -41,7 +41,7 @@ useEffect(()=>{
     <ul>
         <NavMenu>   
         <div className="logo">
-      <img className="logo" alt="greencarrotapple"src={image} style={{height:"80px"}} />
+      <img className="logo" alt="greencarrotapple"src={image} style={{height:"75px"}} />
         </div>
         <li>
           <NavLink to="/about" activeStyle>

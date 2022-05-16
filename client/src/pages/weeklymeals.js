@@ -1,10 +1,10 @@
 import React from 'react';
-// import "react-modern-calendar-datepicker/lib/DatePicker.css";
-// import { Calendar } from "react-modern-calendar-datepicker";
 import { useState, useEffect } from "react";
+import moment from "moment";
+import _ from 'lodash';
 
 function WeeklyMeals( ) {
-// const [selectedDayRange, setSelectedDayRange] = useState({from: null, to: null });
+
 
 const [weeklymeals, setWeeklyMeals] = useState([]);
 
@@ -20,31 +20,70 @@ useEffect(() => {
 
 }, []);
 
+const meals = {
+  Breakfast: [],
+  Lunch: [],
+  Dinner: [],
+  Snacks: [],
+};
 
-// const getWeek = (selectedDayRange) => {
-//   fetch(`http://localhost:3000/api/userview/weekly/${selectedDayRange}`, {
-//     method: 'GET'
-//   }).then((response) => {
-//         if (response.ok) {
-//         }
-//       },
-//         (error) => {
-//           alert(error);
-//         }
-//       )
-//     };
 
+weeklymeals.forEach((meal) => {
+  meals[meal.mealcourse].push(meal);
+});
 
 // console.log(setSelectedDayRange); 
 return (
   <div>
-     {JSON.stringify(weeklymeals)}
-   {/* <Calendar
-          value={selectedDayRange}
-          onChange={setSelectedDayRange}
-          shouldHighlightWeekends
-        />
-        <button className="weekview" onClick={() => getWeek(selectedDayRange)}>View Week</button> */}
+    <h1>Prior Week's Meals</h1>
+     {meals.Breakfast &&
+        <>
+          <h2>Breakfast</h2>
+          <ul>
+            {
+              meals.Breakfast.map((food) => {
+                return (<li id={food.id}> Eaten on: {moment(food.addedon).format("MMM Do, YYYY")} {_.upperFirst(food.foodeaten)} CAL: {food.calories}</li>);
+              })
+            }
+          </ul>
+        </>
+      }
+       {meals.Lunch &&
+        <>
+          <h2>Lunch</h2>
+          <ul>
+            {
+              meals.Lunch.map((food,index) => {
+                return (<li key={index} id={food.id}> Eaten on: {moment(food.addedon).format("MMM Do, YYYY")} {_.upperFirst(food.foodeaten)} CAL: {food.calories}</li>);
+              })
+            }
+          </ul>
+        </>
+      }
+      {meals.Dinner &&
+        <>
+          <h2>Dinner</h2>
+          <ul>
+            {
+              meals.Dinner.map((food,index) => {
+                return (<li key={index} id={food.id}> Eaten on: {moment(food.addedon).format("MMM Do, YYYY")} {_.upperFirst(food.foodeaten)} CAL: {food.calories}</li>);
+              })
+            }
+          </ul>
+        </>
+      }
+      {meals.Snacks &&
+        <>
+          <h2>Snacks</h2>
+          <ul>
+            {
+              meals.Snacks.map((food, index) => {
+                return (<li key={index}id={food.id}> Eaten on: {moment(food.addedon).format("MMM Do, YYYY")} {_.upperFirst(food.foodeaten)} CAL: {food.calories}</li>);
+              })
+            }
+          </ul>
+        </>
+      }
       </div>
 )
     };

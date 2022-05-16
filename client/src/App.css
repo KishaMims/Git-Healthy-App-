@@ -48,12 +48,19 @@ ul{
 .food_details .card-header{
   font-weight: 500;
 }
-.homepage {
-  background: url(homepage.jpeg) no-repeat center center fixed;
-  background-size: cover;
-  height: 100%;
-  overflow: hidden;
-}
 .logo {
   margin-left: 1rem;
+}
+.homepage {
+ font-family: 'Capriola', sans-serif;
+ color: white;
+ font-size: 40px;
+}
+.user_view {
+  margin: auto;
+  width: 18rem;
+}
+.user_view_page{
+  background-color: #5ab1bb;
+  font-family: 'Oswald', sans-serif;
 }

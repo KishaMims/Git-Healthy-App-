@@ -1,7 +1,14 @@
 import React from 'react';
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-// import WeeklyMeals from './weeklymeals';
+import moment from "moment";
+import _ from 'lodash';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import image from './foodcardpic.jpg';
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from 'react-bootstrap/Col';
 
 
 
@@ -80,67 +87,101 @@ const UserView = () => {
 
 
   return (
-    <div className="App">
-      <h1>Your Daily Nutrition Summary</h1>
-      <h1>{date}</h1>
-      {meals.Breakfast &&
+    <div className="user_view_page">
+         <h1>Your Daily Nutrition Summary</h1>
+          <h1>{moment(date).format("MMM Do, YYYY")}</h1>
+          <Container>
+            <Row>
+              <Col md={6}>
+       {meals.Breakfast &&
+    
+        <Card className="user_view">
+          <Card.Img variant="top" src={image} style={{ maxWidth: "286px", maxHeight: "180px" }} />
         <>
-          <h2>Breakfast</h2>
+          <Card.Header>Breakfast</Card.Header>
           <ul>
+          
             {
               meals.Breakfast.map((food) => {
-                return (<li id={food.id}> {food.foodeaten} CAL: {food.calories}<button className="delete" onClick={() => deleteMeal(food.id)}>Delete Meal </button></li>);
+                return (<li id={food.id}> {_.upperFirst(food.foodeaten)} CAL: {food.calories}<Button variant="outline-success" className="delete" onClick={() => deleteMeal(food.id)}>Delete Meal </Button></li>);
               })
             }
           </ul>
         </>
+        </Card>
       }
+      </Col>
+      </Row>
+                  <Row>
+              <Col md={6}>
       {meals.Lunch &&
+        <Card className="user_view" >
+        <Card.Img variant="top" src={image} style={{ maxWidth: "286px", maxHeight: "180px" }} />
         <>
-          <h2>Lunch</h2>
+          <Card.Title>Lunch</Card.Title>
           <ul>
             {
               meals.Lunch.map((food,index) => {
-                return (<li key={index} id={food.id}>{food.foodeaten} CAL: {food.calories}<button className="delete" onClick={() => deleteMeal(food.id)}>Delete Meal </button></li>);
+                return (<li key={index} id={food.id}>{_.upperFirst(food.foodeaten)} CAL: {food.calories}<Button variant="outline-success" className="delete" onClick={() => deleteMeal(food.id)}>Delete Meal </Button></li>);
               })
             }
           </ul>
         </>
+        </Card>
+    
       }
+       </Col>
+      </Row>
+     
+      <Row>
+    <Col md={6}>
       {meals.Dinner &&
+      <Card className="user_view">
+      <Card.Img variant="top" src={image} style={{ maxWidth: "286px", maxHeight: "180px" }} /> 
         <>
-          <h2>Dinner</h2>
+         <Card.Title>Dinner</Card.Title>
           <ul>
             {
               meals.Dinner.map((food,index) => {
-                return (<li key={index} id={food.id}>{food.foodeaten} CAL: {food.calories}<button className="delete" onClick={() => deleteMeal(food.id)}>Delete Meal </button></li>);
+                return (<li key={index} id={food.id}>{_.upperFirst(food.foodeaten)} CAL: {food.calories}<Button variant="outline-success" className="delete" onClick={() => deleteMeal(food.id)}>Delete Meal </Button></li>);
               })
             }
           </ul>
         </>
+        </Card>
       }
+    </Col>
+      </Row>
+
+      <Row>
+    <Col md={6}>
       {meals.Snacks &&
+       <Card className="user_view">
+       <Card.Img variant="top" src={image} style={{ maxWidth: "286px", maxHeight: "180px" }} /> 
         <>
-          <h2>Snacks</h2>
+          <Card.Title>Snacks</Card.Title>
           <ul>
             {
               meals.Snacks.map((food, index) => {
-                return (<li key={index}id={food.id}>{food.foodeaten} CAL: {food.calories}<button className="delete" onClick={() => deleteMeal(food.id)}>Delete Meal </button></li>);
+                return (<li key={index}id={food.id}>{_.upperFirst(food.foodeaten)} CAL: {food.calories}<Button variant="outline-success" className="delete" onClick={() => deleteMeal(food.id)}>Delete Meal </Button></li>);
               })
             }
           </ul>
         </>
+        </Card>
       }
+      </Col>
+      </Row>
+      </Container>
       {meals.Calories &&
         <>
         </>
       }
-      <h2>Total Calories: </h2>
+      <h2>Current Day Calories: </h2>
       {totalCalories}<br />
       <h2> Have you eaten today?</h2>
       <button onClick={navigateToAddMeal}>Add Meal</button><br />
       <br/><button onClick={navigateToWeeklyMeal}>View Week</button>
-{/* <WeeklyMeals/> */}
     </div>
   );
 }
