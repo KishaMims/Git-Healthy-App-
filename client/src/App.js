@@ -1,7 +1,7 @@
 import React from "react";
 import './App.css';
 import Navbar from "./components/Navbar";
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
 import Home from "./pages/homepage";
 import Exercises from "./pages/exercise";
 import About from "./pages/about";
@@ -13,17 +13,25 @@ import UserView from "./pages/userview";
 import MealTime from "./pages/meals";
 import WeeklyMeals from "./pages/weeklymeals";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { useEffect } from "react";
 
 
 function App() {
+
+useEffect(()=>{
+  return <Navigate to='/home' />
+},[])
+
+
+
+
   return (
       <Router>
         <Navbar/>
         <Routes>
         <Route path='/api/login' element={<Login />}/>
         {/* <Route path='/logout' element={<Login />}/> */}
-          <Route path='/home' element={<Home />}/>
+          <Route path='/' element={<Home />}/>
           <Route path='/about' element={<About/>}/>
           <Route path='/api/nutrition' element={<FindFood/>}/>
          <Route path='/exercise' element={<Exercises/>}/>

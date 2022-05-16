@@ -12,7 +12,7 @@ const getRecipes = (e) => {
   let calories = e.target.elements.calories.value;
   console.log(calories);
   // add to request body
-  fetch(`/api/recipes/targetCalories=${calories}`, {
+  fetch(`/api/recipes/?calories=${calories}`, {
       method: "get",
       headers: {"Content-Type": "application/json",
   },
