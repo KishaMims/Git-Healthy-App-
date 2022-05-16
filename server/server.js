@@ -88,22 +88,23 @@ app.get('/api/userview', async (req, res) => {
 })
 
 //db.any('SELECT * FROM users WHERE created < $1 AND active = $2', [new Date(), true])
-
+//WHERE datecolumn >= DATE(NOW() - INTERVAL 7 DAY)
 // testing hard set previous week
 // i want to do something like this here if this is possible 
 // SELECT * FROM meals where userid = '6' AND addedon > CURRENT_DATE - INTERVAL '7 days';
-// app.get('/api/userview/weekly', async (req, res) => {
-//     if (!req.oidc.isAuthenticated()) {
-//         res.status(401).json({ error: 'User not logged in' })
-//     }
+app.get('/api/userview/weekly', async (req, res) => {
+    if (!req.oidc.isAuthenticated()) {
+        res.status(401).json({ error: 'User not logged in' })
+    }
 
-//     if (req.oidc.isAuthenticated()) {
-//         const loggedinuser = await db.query(`SELECT * FROM users WHERE email ='${req.oidc.user.email}'`);
-//         const pastweek = await db.query('SELECT * FROM meals WHERE userid=$1 AND addedon > CURRENT_DATE + INTERVAL 7 DAYS', [loggedinuser.rows[0].id]);
+    if (req.oidc.isAuthenticated()) {
+        const loggedinuser = await db.query(`SELECT * FROM users WHERE email ='${req.oidc.user.email}'`);
+        const pastweek = await db.query("SELECT * FROM meals WHERE userid=$1 AND addedon > CURRENT_DATE - INTERVAL '7 DAYS'", [loggedinuser.rows[0].id]);
+        // const pastweek = await db.query("SELECT * FROM meals WHERE userid=$1 AND addedon >= DATE(NOW() - INTERVAL '7 DAYS'", [loggedinuser.rows[0].id]);
 
-//         return res.json(pastweek.rows);
-//     }
-// })
+        return res.json(pastweek.rows);
+    }
+})
 
 // app.get('/api/userview', async (req, res) => {
 //     if (!req.oidc.isAuthenticated()) {
