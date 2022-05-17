@@ -36,6 +36,12 @@
     transform: rotate(360deg);
   }
 }
+body {
+  background: url(userviewbackground.jpg) no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}
 
 ul{
   list-style: none;
@@ -61,7 +67,6 @@ ul{
   width: 15rem;
 }
 .user_view_page {
-  background-color: #a5c882;
   font-family: 'Oswald', sans-serif;
   color: #a5c882,
 }

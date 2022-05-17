@@ -9,7 +9,8 @@ import image from './bootstrapcardpic.jpg';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
-import background from "./userviewbackground.jpg";
+
+
 
 
 
@@ -88,21 +89,14 @@ const UserView = () => {
 
 
   return (
-    <div className="user_view_page"
-      style={{ 
-      backgroundImage: `url(${background})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-    }}
-    >
+    <div className="user_view_page">
          <h1 className="user_view_header">Your Daily Nutrition Summary</h1>
           <h1 className="user_view_header">{moment(date).format("MMM Do, YYYY")}</h1>
           {meals.Calories &&
         <>
         </>
       }
-      <h2 className="user_calories_box">Current Day Calories: </h2>
+      <h2 className="user_calories_box">Current calories today: </h2>
       <h2 className="user_calories_box">{totalCalories}<br /></h2>
       <h2 className="user_calories_box"> Have you eaten today?</h2>
       <div>
@@ -111,11 +105,11 @@ const UserView = () => {
       </div>
           <Container>
             <Row>
-              <Col md={6}>
+              <Col md={3}>
        {meals.Breakfast &&
     
-        <Card className="user_view">
-          <Card.Img variant="top" src={image} style={{ maxWidth: "286px", maxHeight: "180px" }} /><br/>
+        <Card  border="success" className="user_view">
+          <Card.Img variant="top" src={image} style={{ maxWidth: "286px", maxHeight: "180px" }} />
         <>
           <Card.Title>Breakfast</Card.Title>
           <ul>
@@ -131,9 +125,9 @@ const UserView = () => {
       }<br/>
       </Col>
           
-              <Col md={6}>
+              <Col md={3}>
       {meals.Lunch &&
-        <Card className="user_view" >
+        <Card  border="success" className="user_view" >
         <Card.Img variant="top" src={image} style={{ maxWidth: "286px", maxHeight: "180px" }} />
         <>
           <Card.Title>Lunch</Card.Title>
@@ -149,9 +143,9 @@ const UserView = () => {
     
       }
        </Col>
-    <Col md={6}>
+    <Col md={3}>
       {meals.Dinner &&
-      <Card className="user_view">
+      <Card  border="success" className="user_view">
       <Card.Img variant="top" src={image} style={{ maxWidth: "286px", maxHeight: "180px" }} /> 
         <>
          <Card.Title>Dinner</Card.Title>
@@ -166,10 +160,10 @@ const UserView = () => {
         </Card>
       }
     </Col>
-    <Col md={6}>
+    <Col md={3}>
       {meals.Snacks &&
-       <Card className="user_view">
-       <Card.Img variant="top" src={image} style={{ maxWidth: "286px", maxHeight: "180px" }} /> <br/>
+       <Card  border="success" className="user_view">
+       <Card.Img variant="top" src={image} style={{ maxWidth: "286px", maxHeight: "180px" }} /> 
         <>
           <Card.Title>Snacks</Card.Title>
           <ul>
@@ -185,7 +179,6 @@ const UserView = () => {
       </Col>
       </Row>
       </Container>
-      
     </div>
   );
 }

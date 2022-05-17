@@ -4,14 +4,7 @@ import background from "./userviewbackground.jpg";
 
 function About() {
   return ( 
-    <div className="HomeTitle"
-      style={{ 
-      backgroundImage: `url(${background})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-    }}
-    >
+    <div className="HomeTitle">
         <h1 className="HomeTitle">About Us</h1>
         <h2 className="HomeTitle">
         Git Healthy is a convenient way to track your daily calorie intake from the foods you eat. 
