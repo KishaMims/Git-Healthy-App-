@@ -94,18 +94,28 @@ const UserView = () => {
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
-      height: "895px"
     }}
     >
          <h1 className="user_view_header">Your Daily Nutrition Summary</h1>
           <h1 className="user_view_header">{moment(date).format("MMM Do, YYYY")}</h1>
+          {meals.Calories &&
+        <>
+        </>
+      }
+      <h2 className="user_calories_box">Current Day Calories: </h2>
+      <h2 className="user_calories_box">{totalCalories}<br /></h2>
+      <h2 className="user_calories_box"> Have you eaten today?</h2>
+      <div>
+      <Button className="user_calories_box" variant="outline-success" onClick={navigateToAddMeal}>Add Meal</Button><br />
+      <br/><Button className="user_calories_box" variant="outline-success" onClick={navigateToWeeklyMeal}>View Week</Button>
+      </div>
           <Container>
             <Row>
               <Col md={6}>
        {meals.Breakfast &&
     
         <Card className="user_view">
-          <Card.Img variant="top" src={image} style={{ maxWidth: "286px", maxHeight: "180px" }} />
+          <Card.Img variant="top" src={image} style={{ maxWidth: "286px", maxHeight: "180px" }} /><br/>
         <>
           <Card.Title>Breakfast</Card.Title>
           <ul>
@@ -118,7 +128,7 @@ const UserView = () => {
           </ul>
         </>
         </Card>
-      }
+      }<br/>
       </Col>
           
               <Col md={6}>
@@ -159,7 +169,7 @@ const UserView = () => {
     <Col md={6}>
       {meals.Snacks &&
        <Card className="user_view">
-       <Card.Img variant="top" src={image} style={{ maxWidth: "286px", maxHeight: "180px" }} /> 
+       <Card.Img variant="top" src={image} style={{ maxWidth: "286px", maxHeight: "180px" }} /> <br/>
         <>
           <Card.Title>Snacks</Card.Title>
           <ul>
@@ -175,15 +185,7 @@ const UserView = () => {
       </Col>
       </Row>
       </Container>
-      {meals.Calories &&
-        <>
-        </>
-      }
-      <h2 className="user_view_header">Current Day Calories: </h2>
-      {totalCalories}<br />
-      <h2 className="user_view_header"> Have you eaten today?</h2>
-      <button onClick={navigateToAddMeal}>Add Meal</button><br />
-      <br/><button onClick={navigateToWeeklyMeal}>View Week</button>
+      
     </div>
   );
 }

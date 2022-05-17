@@ -69,6 +69,11 @@ ul{
   font-weight: 800;
   color: #1e152a;
 }
+.user_calories_box{
+  font-weight: 800;
+  color: #1e152a;
+  text-align: left;
+}
 .nav{
   border-bottom: 1px solid #333;
 }
@@ -114,4 +119,11 @@ td {
 }
 a.login {
 color:#1e152a;
+}
+.delete {
+  margin: 10px;
+}
+.user_view .card-title{
+  text-align: center;
+  font-weight: 500;
 }
