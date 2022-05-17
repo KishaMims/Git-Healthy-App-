@@ -3,8 +3,23 @@
 <img src="https://user-images.githubusercontent.com/86165064/164090412-1fcd84ad-75d8-424c-a8c8-36678e0ca5cb.png" width=20% height=30% /> </br>
 <h1>Overview</h1> </br>
 Git Healthy is a convenient way to track your daily calorie intake from the foods you eat.  Its focus is to help you monitor what you are eating to live a healthier lifestyle.
-<p>API provided and powered by: Edamam</p>
-<center><img src="https://user-images.githubusercontent.com/86165064/164568232-5376c629-5230-4981-a6ab-2da664758b55.svg"/> </center>
+<p>API'S Used</p> 
+<a href="https://calorieninjas.com/api">Calorie Ninja API</a><br/>
+<a href="https://spoonacular.com/food-api">Spoontacular API</a><br/>
+<a href="https://auth0.com/docs/quickstart/backend/nodejs/01-authorization)">Auth 0</a>
+</center>
+<h1>Running Locally</h1>
+<ul>
+  <li>Install & run Docker</li>
+  <li>Fork & clone this repo</li>
+  <li>In your CLI, from the root directory, run `npm install`</li>
+   <li>Navigate into /app with `cd app` & run `npm install</li>
+  <li>Navigate back to the root directory & run `npm run db:init`</li>
+  <li>Also from the root directory, run `npm start`</li>
+  <li>Git Healthy will be running on localhost:3000.</li>
+  <li>The server will run on localhost:3001.</li>
+</ul>
+<br/>
 <h1>Techstack</h1>
 Languages
 <uL>
@@ -18,8 +33,14 @@ Languages
   <li>Express.js</li>
   <li>Node.js</li>
   </br>
+<h1>MVP</h1>
+<ul>
+  <li>Users will be able to login with Google sign in.</li>
+  <li>Users will be able to save and review past weeks' food journals.</li>
+  <li>Users will be able to see total calories for food eaten.</li>
+</ul>
  <h1>User Flow</h1>
 <center><img src="https://user-images.githubusercontent.com/86165064/164325673-e9cce3af-b8ba-4fdd-ae09-c44e3d373dc1.jpg"/> </center>
 </br>
  <h1>Data Model</h1>
-<center><img src="https://user-images.githubusercontent.com/86165064/164808360-b3d95416-a9b6-4886-8321-09d5654cdb10.jpg"/></center>
+<center><img src="https://user-images.githubusercontent.com/86165064/168924614-fea47dd8-7f20-4fe8-8682-8a5a7ccc77a5.jpg"/></center>
