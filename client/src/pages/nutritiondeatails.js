@@ -22,6 +22,7 @@ useEffect(()=> {
     <div className='nutrtion_info'>
     {!nutrition ? (<h2 className='checking'>
      {" "}Check your food's nutrition{" "}</h2>) : (
+       <div className="food_card_details">
       <Card className="food_details">
       <Card.Header>{_.upperFirst(nutrition.items[0].name)}</Card.Header>
       <ListGroup variant="flush">
@@ -32,7 +33,9 @@ useEffect(()=> {
         <ListGroup.Item>Total Carbohydrates: {nutrition.items[0].carbohydrates_total_g} g</ListGroup.Item>
       </ListGroup>
     </Card>
+    </div>
      )}
+     
      <MealTime food={food} calories={calories}/> 
     </div>
   )

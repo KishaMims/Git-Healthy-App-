@@ -1,48 +1,22 @@
 import React from "react";
-import Carousel from "react-bootstrap/Carousel";
+import Card from 'react-bootstrap/Card';
+import image from './flatouburpies.jpeg';
 
 
 function Exercises() {
   return ( 
-    <div className="HomeTitle">
-        <h1 className="HomeTitle">Git healthy exercise page</h1>
-        <Carousel>
-  <Carousel.Item>
-    <img
-      className="d-block w-100"
-      src="holder.js/800x400?text=First slide&bg=373940"
-      alt="First slide"
-    />
-    <Carousel.Caption>
-      <h3>Flat Out Burpies</h3>
-      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-    </Carousel.Caption>
-  </Carousel.Item>
-  <Carousel.Item>
-    <img
-      className="d-block w-100"
-      src="holder.js/800x400?text=Second slide&bg=282c34"
-      alt="Second slide"
-    />
-
-    <Carousel.Caption>
-      <h3>Second slide label</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </Carousel.Caption>
-  </Carousel.Item>
-  <Carousel.Item>
-    <img
-      className="d-block w-100"
-      src="holder.js/800x400?text=Third slide&bg=20232a"
-      alt="Third slide"
-    />
-
-    <Carousel.Caption>
-      <h3>Third slide label</h3>
-      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-    </Carousel.Caption>
-  </Carousel.Item>
-</Carousel>
+  <div>
+    <h1>Check out some quick at home exercies!</h1>
+    <Card style={{ width: '18rem' }}>
+  <Card.Img variant="top" src={image}/>
+  <Card.Body>
+    <Card.Title>Flat Out Burpies</Card.Title>
+    <Card.Text>
+    Burpees are the go-to exercise for a quick, intense workout.
+    </Card.Text>
+    <a href="https://www.youtube.com/watch?v=HA6xpfVO9K8">Let's get moving!</a>
+  </Card.Body>
+</Card>
     </div>
 
   )

@@ -46,9 +46,13 @@ body {
 ul{
   list-style: none;
 }
+.food_card_details{
+  margin-right:auto; 
+  margin-left:auto ;
+}
 
 .food_details{
- margin: 24px;
+ margin: 50px;
  width: 18rem;
 }
 .food_details .card-header{
@@ -131,4 +135,16 @@ color:#1e152a;
 .user_view .card-title{
   text-align: center;
   font-weight: 500;
+}
+.weekly_view_box{
+  justify-content: "center";
+  align-items: "center";
+}
+.weekly_view {
+  font-family: 'Oswald', sans-serif;
+  color: #1e152a;
+}
+.weekly_view_header{
+ font-size: 50px;
+ font-weight: 800;
 }
