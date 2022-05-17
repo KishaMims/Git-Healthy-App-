@@ -36,7 +36,7 @@ useEffect(()=>{
 
     return (
     <> 
-    <Nav>
+    <Nav className="nav">
    
     <ul>
         <NavMenu>   

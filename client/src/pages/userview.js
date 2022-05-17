@@ -5,10 +5,11 @@ import moment from "moment";
 import _ from 'lodash';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import image from './foodcardpic.jpg';
+import image from './bootstrapcardpic.jpg';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
+import background from "./userviewbackground.jpg";
 
 
 
@@ -87,9 +88,17 @@ const UserView = () => {
 
 
   return (
-    <div className="user_view_page">
-         <h1>Your Daily Nutrition Summary</h1>
-          <h1>{moment(date).format("MMM Do, YYYY")}</h1>
+    <div className="user_view_page"
+      style={{ 
+      backgroundImage: `url(${background})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      height: "895px"
+    }}
+    >
+         <h1 className="user_view_header">Your Daily Nutrition Summary</h1>
+          <h1 className="user_view_header">{moment(date).format("MMM Do, YYYY")}</h1>
           <Container>
             <Row>
               <Col md={6}>
@@ -98,12 +107,12 @@ const UserView = () => {
         <Card className="user_view">
           <Card.Img variant="top" src={image} style={{ maxWidth: "286px", maxHeight: "180px" }} />
         <>
-          <Card.Header>Breakfast</Card.Header>
+          <Card.Title>Breakfast</Card.Title>
           <ul>
           
             {
               meals.Breakfast.map((food) => {
-                return (<li id={food.id}> {_.upperFirst(food.foodeaten)} CAL: {food.calories}<Button variant="outline-success" className="delete" onClick={() => deleteMeal(food.id)}>Delete Meal </Button></li>);
+                return (<li id={food.id}> {_.upperFirst(food.foodeaten)} Cal {food.calories}<Button variant="outline-success" className="delete" onClick={() => deleteMeal(food.id)}>Delete Meal </Button></li>);
               })
             }
           </ul>
@@ -111,8 +120,7 @@ const UserView = () => {
         </Card>
       }
       </Col>
-      </Row>
-                  <Row>
+          
               <Col md={6}>
       {meals.Lunch &&
         <Card className="user_view" >
@@ -122,7 +130,7 @@ const UserView = () => {
           <ul>
             {
               meals.Lunch.map((food,index) => {
-                return (<li key={index} id={food.id}>{_.upperFirst(food.foodeaten)} CAL: {food.calories}<Button variant="outline-success" className="delete" onClick={() => deleteMeal(food.id)}>Delete Meal </Button></li>);
+                return (<li key={index} id={food.id}>{_.upperFirst(food.foodeaten)} Cal {food.calories}<Button variant="outline-success" className="delete" onClick={() => deleteMeal(food.id)}>Delete Meal </Button></li>);
               })
             }
           </ul>
@@ -131,9 +139,6 @@ const UserView = () => {
     
       }
        </Col>
-      </Row>
-     
-      <Row>
     <Col md={6}>
       {meals.Dinner &&
       <Card className="user_view">
@@ -143,7 +148,7 @@ const UserView = () => {
           <ul>
             {
               meals.Dinner.map((food,index) => {
-                return (<li key={index} id={food.id}>{_.upperFirst(food.foodeaten)} CAL: {food.calories}<Button variant="outline-success" className="delete" onClick={() => deleteMeal(food.id)}>Delete Meal </Button></li>);
+                return (<li key={index} id={food.id}>{_.upperFirst(food.foodeaten)} Cal {food.calories}<Button variant="outline-success" className="delete" onClick={() => deleteMeal(food.id)}>Delete Meal </Button></li>);
               })
             }
           </ul>
@@ -151,9 +156,6 @@ const UserView = () => {
         </Card>
       }
     </Col>
-      </Row>
-
-      <Row>
     <Col md={6}>
       {meals.Snacks &&
        <Card className="user_view">
@@ -163,7 +165,7 @@ const UserView = () => {
           <ul>
             {
               meals.Snacks.map((food, index) => {
-                return (<li key={index}id={food.id}>{_.upperFirst(food.foodeaten)} CAL: {food.calories}<Button variant="outline-success" className="delete" onClick={() => deleteMeal(food.id)}>Delete Meal </Button></li>);
+                return (<li key={index}id={food.id}>{_.upperFirst(food.foodeaten)} Cal {food.calories}<Button variant="outline-success" className="delete" onClick={() => deleteMeal(food.id)}>Delete Meal </Button></li>);
               })
             }
           </ul>
@@ -177,9 +179,9 @@ const UserView = () => {
         <>
         </>
       }
-      <h2>Current Day Calories: </h2>
+      <h2 className="user_view_header">Current Day Calories: </h2>
       {totalCalories}<br />
-      <h2> Have you eaten today?</h2>
+      <h2 className="user_view_header"> Have you eaten today?</h2>
       <button onClick={navigateToAddMeal}>Add Meal</button><br />
       <br/><button onClick={navigateToWeeklyMeal}>View Week</button>
     </div>

@@ -1,17 +1,26 @@
 import React from "react";
+import background from "./userviewbackground.jpg";
 
 
 function About() {
   return ( 
-    <div className="HomeTitle">
+    <div className="HomeTitle"
+      style={{ 
+      backgroundImage: `url(${background})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+    }}
+    >
         <h1 className="HomeTitle">About Us</h1>
-        <p>
+        <h2 className="HomeTitle">
         Git Healthy is a convenient way to track your daily calorie intake from the foods you eat. 
         Our focus is to help you monitor what you are eating to live a healthier lifestyle.
-        </p>
-        <h2>Find out how many calories you should be intaking below:</h2>
+        </h2><br/>
+        <h2 className="HomeTitle">Find out how many calories you should be intaking below:</h2>
         <div className="calorieTable">
         <table>
+        <th colspan="10">Estimated Calorie Requirements</th>
         <tr>
           <th>Gender</th>
           <th>Age(years)</th>

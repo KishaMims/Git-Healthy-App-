@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from "react";
 import moment from "moment";
 import _ from 'lodash';
+import background from "./userviewbackground.jpg";
 
 function WeeklyMeals( ) {
 
@@ -34,7 +35,14 @@ weeklymeals.forEach((meal) => {
 
 // console.log(setSelectedDayRange); 
 return (
-  <div>
+  <div className='weekly_view'
+  style={{ 
+    backgroundImage: `url(${background})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    height: "895px"
+  }}>
     <h1>Prior Week's Meals</h1>
      {meals.Breakfast &&
         <>
