@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-//import { useParams } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+
 
 
 
@@ -33,14 +34,15 @@ const [user, setUser] = useState(undefined);
     <div>
 
             {!user ? (
-            <ul><button className="login">
-                <a href="http://localhost:3001/login">Login</a>
-                </button>
+            <ul><Button className="login" variant="secondary">
+                <a className='login' href="http://localhost:3001/login">Login</a>
+                </Button>{' '}
                 </ul>
                 ) : (
-                <ul>Welcome, {user.given_name}
-        <button><a href="http://localhost:3001/logout">Logout</a>
-        </button>
+                <ul>Welcome, {user.given_name}      
+
+        <Button className="login" variant="secondary"><a className='login' href="http://localhost:3001/logout">Logout</a>
+        </Button>{' '}
         </ul>
         )}
     </div>
