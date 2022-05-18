@@ -23,8 +23,6 @@ useEffect(()=>{
 },[])
 
 
-
-
   return (
       <Router>
         <Navbar/>
