@@ -36,7 +36,7 @@ the better you will feel!</h2>
     <Card.Text>
     The 180 jump squat is a plyometric move that fully engages your lower body and your core and helps build strength, speed, and increases aerobic fitness. 
     </Card.Text>
-    <a class="link-light" href="https://www.youtube.com/watch?v=aWyo34mLLw0">Let's get moving!</a>
+    <a className="link-light" href="https://www.youtube.com/watch?v=aWyo34mLLw0">Let's get moving!</a>
   </Card.Body>
 </Card>
 </Col>
@@ -50,7 +50,7 @@ the better you will feel!</h2>
     <Card.Text>
     Knee push-ups are a legit upper-body exercise. They're the perfect intro to standard push-ups.
     </Card.Text>
-    <a class="link-light" href="https://www.youtube.com/watch?v=xc0GYALoFyA">Let's get moving!</a>
+    <a className="link-light" href="https://www.youtube.com/watch?v=xc0GYALoFyA">Let's get moving!</a>
   </Card.Body>
 </Card>
 </Col>
@@ -62,7 +62,7 @@ the better you will feel!</h2>
     <Card.Text>
     Knee push-ups are a legit upper-body exercise. They're the perfect intro to standard push-ups.
     </Card.Text>
-    <a class="link-light" href="https://www.youtube.com/watch?v=HA6xpfVO9K8">Let's get moving!</a>
+    <a className="link-light" href="https://www.youtube.com/watch?v=HA6xpfVO9K8">Let's get moving!</a>
   </Card.Body>
 </Card>
 </Col>
