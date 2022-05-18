@@ -20,7 +20,7 @@ const FindFood = () => {
 
   return (
     <div className="HomeTitle">
-      <h1 className="HomeTitle">Git healthy Nutrition Page</h1>
+      <h1 className="HomeTitle">Check your meal's nutrition below:</h1>
       <SearchFood getFoodNutrition={getFoodNutrition} />
       <Nutrition nutrition={nutrition} />
       <div>

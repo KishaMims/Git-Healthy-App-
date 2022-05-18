@@ -9,7 +9,8 @@ import image from './bootstrapcardpic.jpg';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
-
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 
 
@@ -44,20 +45,45 @@ const UserView = () => {
 
   }, []);
 
-//delete request 
+
+  const MySwal = withReactContent(Swal);
+
   const deleteMeal = (id) => {
-    fetch(`http://localhost:3000/api/userview/${id}`, {
+    MySwal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed){
+      fetch(`http://localhost:3000/api/userview/${id}`, {
       method: 'DELETE'
-    }).then((response) => {
-          if (response.ok) {
-            getMeals();
-          }
-        },
-          (error) => {
-            alert(error);
-          }
-        )
-      };
+    }).then(() => {
+      getMeals();
+    })
+  }
+})
+};
+
+
+
+//delete request 
+  // const deleteMeal = (id) => {
+  //   fetch(`http://localhost:3000/api/userview/${id}`, {
+  //     method: 'DELETE'
+  //   }).then((response) => {
+  //         if (response.ok) {
+  //           getMeals();
+  //         }
+  //       },
+  //         (error) => {
+  //           alert(error);
+  //         }
+  //       )
+  //     };
 
 
  // link to add meal      

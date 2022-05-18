@@ -11,8 +11,8 @@ function About() {
         Our focus is to help you monitor what you are eating to live a healthier lifestyle.
         </h2><br/>
         <h2 className="HomeTitle">Find out how many calories you should be intaking below:</h2>
-        <div className="calorieTable">
-        <table>
+      <br/>
+        <table className="table_calories">
         <th colspan="10">Estimated Calorie Requirements</th>
         <tr>
           <th>Gender</th>
@@ -139,7 +139,6 @@ function About() {
           <td></td>
           </tr>
       </table> 
-      </div>
     </div>
   )
 }

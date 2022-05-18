@@ -21,7 +21,7 @@ useEffect(()=> {
   return (
     <div className='nutrtion_info'>
     {!nutrition ? (<h2 className='checking'>
-     {" "}Check your food's nutrition{" "}</h2>) : (
+     {" "}When did you eat?{" "}</h2>) : (
        <div className="food_card_details">
       <Card className="food_details">
       <Card.Header>{_.upperFirst(nutrition.items[0].name)}</Card.Header>
