@@ -108,7 +108,7 @@ const UserView = () => {
 
   usermeals.forEach((meal) => {
     meals[meal.mealcourse].push(meal);
-    totalCalories += Number(meal.calories);
+    totalCalories += Math.round(Number(meal.calories));
   });
 
   //delete function 

@@ -23,7 +23,7 @@ useEffect(()=> {
     {!nutrition ? (<h2 className='checking'>
      {" "}When did you eat?{" "}</h2>) : (
        <div className="food_card_details">
-      <Card className="food_details">
+      <Card border="success" className="food_details">
       <Card.Header>{_.upperFirst(nutrition.items[0].name)}</Card.Header>
       <ListGroup variant="flush">
         <ListGroup.Item>Total Grams of Fat: {nutrition.items[0].fat_total_g} g</ListGroup.Item>

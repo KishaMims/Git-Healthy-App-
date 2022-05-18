@@ -2,9 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const fetch = require('node-fetch');
-// const fetch = (...args) =>
-//  import('node-fetch').then(({ default: fetch }) => fetch(...args));
-//const axios = require('axios');
 require('dotenv').config()
 const { auth, requiresAuth } = require('express-openid-connect');
 const db = require('../server/db/db-connection.js');
@@ -87,11 +84,7 @@ app.get('/api/userview', async (req, res) => {
     }
 })
 
-//db.any('SELECT * FROM users WHERE created < $1 AND active = $2', [new Date(), true])
-//WHERE datecolumn >= DATE(NOW() - INTERVAL 7 DAY)
-// testing hard set previous week
-// i want to do something like this here if this is possible 
-// SELECT * FROM meals where userid = '6' AND addedon > CURRENT_DATE - INTERVAL '7 days';
+// get weeklyview 
 app.get('/api/userview/weekly', async (req, res) => {
     if (!req.oidc.isAuthenticated()) {
         res.status(401).json({ error: 'User not logged in' })
@@ -106,18 +99,6 @@ app.get('/api/userview/weekly', async (req, res) => {
     }
 })
 
-// app.get('/api/userview', async (req, res) => {
-//     if (!req.oidc.isAuthenticated()) {
-//         res.status(401).json({ error: 'User not logged in' })
-//     }
-
-//     if (req.oidc.isAuthenticated()) {
-//         const currentuser = await db.query(`SELECT * FROM users WHERE email ='${req.oidc.user.email}'`);
-//         const userweeklymeal = await db.query('SELECT * FROM meals WHERE userid =$1 AND addedon BETWEEN=$2 AND=$3  ', [currentuser.rows[0].id, ]);
-
-//         return res.json(usermeals.rows);
-//     }
-// })
 
 
 // food nutrition fetch 
@@ -217,21 +198,7 @@ app.post('/api/setmeals', cors(), async (req, res) => {
 
 
  
-
-    // SELECT * FROM meals WHERE id =$1 AND added_on =$2 AND =$3'
-    //get weekly view of meals 
-    // app.get('/api/nutrition/weeklyview/:selectedrange', cors(), async (req, res) => {
-    //     const selectedDayRange = req.params.selectedDayRange
-    //     try {
-    //         const meals = await db.query('SELECT * FROM meals WHERE id =$1', [id, [selectedDayRange],
-    //         res.send(meals),
-    //     } catch (e) {
-    //         return res.status(400).json({ e });
-    //     }
-    // });
-
-
-    //recipe fetch info 
+//recipe fetch info 
 
 
 // calories post for recipes page  

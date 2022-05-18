@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
+
 export default function MealTime (props) {
 
   const {calories, food } = props;
@@ -67,7 +68,7 @@ export default function MealTime (props) {
         </input>
         <label>Snack</label><br></br>
       </form>
-      <button onClick={createMeal}>Save Meal</button>
+      <button className="meal_button"onClick={createMeal}>Save Meal</button>
     </div>
   );
 }

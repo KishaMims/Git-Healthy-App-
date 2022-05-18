@@ -4,10 +4,10 @@ import Button from 'react-bootstrap/Button';
 
 
 
-
 export default function Login() {
 
 const [user, setUser] = useState(undefined);
+
    
     const loadUser = () => {
         fetch("/api/login")
@@ -21,6 +21,7 @@ const [user, setUser] = useState(undefined);
         })
         .then(user =>{
             setUser(user);
+            
         })
     };
     

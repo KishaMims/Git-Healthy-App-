@@ -12,6 +12,7 @@ function About() {
         </h2><br/>
         <h2 className="HomeTitle">Find out how many calories you should be intaking below:</h2>
       <br/>
+      <div className="table_contatiner">
         <table className="table_calories">
         <th colspan="10">Estimated Calorie Requirements</th>
         <tr>
@@ -137,8 +138,9 @@ function About() {
           <td>2,200-2,400</td>
           <td>2,400-2,800</td>
           <td></td>
-          </tr>
+          </tr>     
       </table> 
+      </div>
     </div>
   )
 }

@@ -5,7 +5,7 @@ function RecipeForm(props) {
     return (
         <form className="recipe-form" onSubmit={props.getRecipes}>
             <input type="text" name="calories" placeholder="Calories" />
-            <button variant="outline-success"> Search</button>
+            <button className="recipe_button"> Search</button>
         </form>
     )
 };

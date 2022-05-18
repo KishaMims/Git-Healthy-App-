@@ -1,6 +1,7 @@
 import React from "react";
 
 
+
 function SearchFood(props) {
 
         
@@ -9,8 +10,8 @@ function SearchFood(props) {
      <div>
     <form className="search-food-form" onSubmit={props.getFoodNutrition}>
             <input type="text" name="food" placeholder="Enter your meal"/>
-            <br/>
-            <button> Search </button>
+            <br/><br/>
+            <button variant="outline-success" className="food_search"> Search </button>
 
         </form>
         </div>
