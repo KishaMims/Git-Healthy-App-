@@ -7,13 +7,8 @@ import Login from "../../pages/login.js";
 
 const Navbar = () => {
 
-// const [hidelink, setHideLink] = useState(undefined);
 
-// const login = () => {
-//   setHideLink(false);
-// }
-
-const [isMobile, seIstMobile] = useState(false);
+// const [isMobile, seIstMobile] = useState(false);
 
 const [user, setUser] = useState(undefined);
 
@@ -81,12 +76,12 @@ useEffect(()=>{
                 </li>
         </NavMenu>
         </ul>
-        <button className="mobile-menu-icon">
+        {/* <button className="mobile-menu-icon">
           {isMobile ? (<i clasName="fas fa-times"></i>
     ) : (
         <i className="fas fa-bars"></i>
     )}
-        </button>
+        </button> */}
     </Nav>
     </>
 )
