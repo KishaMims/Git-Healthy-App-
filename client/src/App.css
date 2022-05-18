@@ -25,7 +25,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #1e152a;
 }
 
 @keyframes App-logo-spin {
@@ -92,14 +92,14 @@ ul{
   font-family: 'Oswald', sans-serif;
 }
 .table_container{
- margin: center;
+  margin-left: 25vw;  
 }
 table {
   border: 6px solid #a5c882;
   width: 800px;
   height: 200px;
   background-color:  #96D4D4;
-} 
+}
 th {
   border-bottom: 1px solid black;
 } 
@@ -207,3 +207,43 @@ color:#1e152a;
   font-weight: 900;
   font-size: 40px;
 }
+.nav{
+    display: 'flex';
+    justify-content: "right";
+    align-items: "right";
+    height: '100vh';
+}
+.mobile-menu-icon {
+display: none;
+}
+@media screen and(max-width: 780px){
+.Log{
+  display: felx;
+  position: absoulte;
+  top: 15px;
+  left: 35px;
+}
+.nav-links {
+ display:none;
+
+}
+.nav-links-mobile {
+  position: absoulte;
+  display: block;
+  list-style: none;
+  background-color: #a5c882;
+  left: 0;
+  top:75px;
+  transition: all 0.5 ease-out;
+  width: 100%;
+
+}
+}
+.contact_me_button {
+  background-color: #a5c882 !important;
+  color: #1e152a;
+  border: 2px solid #4CAF50; /* Green */
+}
+a.excercise {
+  color:#1e152a !important;
+  }

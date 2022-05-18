@@ -2,6 +2,7 @@ import React from "react";
 
 
 
+
 function About() {
   return ( 
     <div className="HomeTitle">
@@ -12,7 +13,7 @@ function About() {
         </h2><br/>
         <h2 className="HomeTitle">Find out how many calories you should be intaking below:</h2>
       <br/>
-      <div className="table_contatiner">
+      <div className="table_container">
         <table className="table_calories">
         <th colspan="10">Estimated Calorie Requirements</th>
         <tr>

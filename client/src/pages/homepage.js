@@ -1,6 +1,6 @@
 
 import React from "react";
-
+import background from "./homepagebckgrd.jpg";
 
 
 
@@ -8,8 +8,14 @@ import React from "react";
 function Home () {
     
     return (
-        <div className="homepage">
-           Git Healthy 
+        <div className="homepage"
+        style={{ 
+            backgroundImage: `url(${background})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            height: "895px"
+          }}>
            <div>
            </div>
           </div>
