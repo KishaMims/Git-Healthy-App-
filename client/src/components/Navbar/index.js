@@ -72,7 +72,7 @@ useEffect(()=>{
                 </NavLink>
                 </li>
                 <li>
-                  <Login/>
+                  <Login user={user}/>
                 </li>
         </NavMenu>
         </ul>
