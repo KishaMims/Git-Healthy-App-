@@ -5,8 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "server": "nodemon server.js",
-    "install": "cd client && npm install && npm run build && cd .."
+    "server": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
