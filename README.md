@@ -38,7 +38,7 @@ Languages
   <li>Users will be able to login with Google sign in.</li>
   <li>Users will be able to save and review past weeks' food journals.</li>
   <li>Users will be able to see total calories for food eaten.</li>
-</ul>(
+</ul>
 <h1>Homepage</h1>
 <center><img src="https://user-images.githubusercontent.com/86165064/169418804-21bf70c8-9190-436b-bc80-cd977ac42aa5.jpg"/></center>
 <h1>UserView</h1>
