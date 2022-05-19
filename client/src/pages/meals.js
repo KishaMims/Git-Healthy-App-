@@ -16,7 +16,7 @@ export default function MealTime (props) {
 
   const createMeal = (e) => {
     const dailymeal = { foodeaten:food, calories:calories, mealcourse:mealCourse};
-    fetch('http://localhost:3000/api/setmeals', {
+    fetch('/api/setmeals', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dailymeal)
