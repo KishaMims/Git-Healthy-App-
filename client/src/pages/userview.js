@@ -59,7 +59,7 @@ const UserView = () => {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed){
-      fetch(`http://localhost:3000/api/userview/${id}`, {
+      fetch(`/api/userview/${id}`, {
       method: 'DELETE'
     }).then(() => {
       getMeals();
