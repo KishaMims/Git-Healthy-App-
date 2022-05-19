@@ -12,7 +12,9 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+/* @media screen and (max-width: 500px){
+  .homepage
+} */
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -39,8 +41,8 @@
 body {
   background: url(userviewbackground.jpg) no-repeat center center fixed;
   background-size: cover;
-  height: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
+  height:100%;
 }
 
 ul{
@@ -246,4 +248,19 @@ display: none;
 }
 a.excercise {
   color:#1e152a !important;
-  }
+  }  
+
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)  {
+  table, thead, tbody, th, td, tr { 
+		display: table-column; 
+	}
+  tr { border: 1px solid #ccc; }
+	
+}
+
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)  {
+.HomeTitle h3 {
+    display:none;
+}
+
+}

@@ -29,7 +29,7 @@ export const Bars = styled(FaBars)`
   display: none;
   border-bottom: 1px solid #333;
   color: orangered;
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 390px) {
     display: block;
     position: absolute;
     top: 0;
@@ -49,7 +49,7 @@ export const NavMenu = styled.div`
   /* Third Nav */
   /* width: 100vw;
 white-space: nowrap; */
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 390px) {
     display: none;
   }
 `;

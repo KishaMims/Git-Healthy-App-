@@ -9,7 +9,7 @@ function About() {
         Git Healthy is a convenient way to track your daily calorie intake from the foods you eat. 
         Our focus is to help you monitor what you are eating to live a healthier lifestyle.
         </h2><br/>
-        <h2 className="HomeTitle">Find out how many calories you should be intaking below:</h2>
+        <h3 className="HomeTitle">Find out how many calories you should be intaking below:</h3>
       <br/>
       <div className="table_container">
         <table className="table_calories">

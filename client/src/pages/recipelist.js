@@ -13,8 +13,8 @@ function RecipeList(props) {
       {!recipes ? (<h2 className='checking'>
         {" "}
         Ready to eat? Search for a recipie based on your calorie needs.{" "} </h2>) : (
-          <>
-          <CardGroup>
+          <><br/>
+          <CardGroup className="recipe-list"  xs={1}>
           <Card border="success" bg="success" className="recipe_list" >
             <Card.Body>
               <Card.Title>{recipes.meals[0].title}</Card.Title>
@@ -23,7 +23,7 @@ function RecipeList(props) {
               </Card.Text>
               <a className="link-light" href={recipes.meals[0].sourceUrl}>Go to Recipe!</a>
             </Card.Body>
-          </Card>
+          </Card><br/>
           <Card border="success" bg="success" className="recipe_list" >
               <Card.Body>
                 <Card.Title>{recipes.meals[1].title}</Card.Title>
@@ -41,7 +41,7 @@ function RecipeList(props) {
               </Card.Text>
               <a className="link-light" href={recipes.meals[2].sourceUrl} >Go to Recipe!</a>
             </Card.Body>
-          </Card>
+          </Card><br/>
           </CardGroup>
           </>     
       )}
