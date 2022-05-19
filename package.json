@@ -1,8 +1,5 @@
 {
   "dependencies": {
-    "create-react-app": "^5.0.0",
-    "react-native-email-link": "^1.13.1",
-    "reactv16-mailto": "^0.4.4",
-    "request": "^2.88.2"
+    "create-react-app": "^5.0.0"
   }
 }
