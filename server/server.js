@@ -29,9 +29,6 @@ app.use(express.json());
 
 //creates an endpoint for the route /api
 app.get('/', (req, res) => {
-    const d = new Date();
-    res.json({ currentTime: d.toTimeString() });
-    console.log('I am on line 103');
     console.log(req.oidc.isAuthenticated());
     res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
 });
