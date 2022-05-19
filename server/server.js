@@ -8,7 +8,7 @@ const db = require('../server/db/db-connection.js');
 const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 const app = express();
 
-
+//adding 
 
 const config = {
     authRequired: false,
