@@ -224,3 +224,12 @@ app.get("/api/recipes", cors(), async (req, res) => {
     app.listen(PORT, () => {
         console.log(`Server listening on ${PORT}`);
     });
+
+
+    app.use(function(req, res, next) {
+        // update to match the domain you will make the request from
+        res.header("Access-Control-Allow-Origin", "https://git-healthy-22.herokuapp.com/");
+        res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+        });
