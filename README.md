@@ -45,7 +45,7 @@ Languages
   <li>Users will be able to save and review past weeks' food journals.</li>
   <li>Users will be able to see total calories for food eaten.</li>
   </ul>
-  <h1>Current Production Running on Docker</h1>
+  <h1>Current Production Running on Heroku</h1>
 <a href="https://git-healthy-22.herokuapp.com">Live Link</a>
   <p>Test Login:githealthycustomerservice@gmail.com / githealthyemail</p>
 <h1>Homepage</h1>
