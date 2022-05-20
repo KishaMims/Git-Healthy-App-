@@ -47,7 +47,6 @@ Languages
   </ul>
   <h1>Current Production Running on Heroku</h1>
 <a href="https://git-healthy-22.herokuapp.com">Live Link</a>
-  <p>Test Login:githealthycustomerservice@gmail.com / githealthyemail</p>
 <h1>Homepage</h1>
 <center><img src="https://user-images.githubusercontent.com/86165064/169418804-21bf70c8-9190-436b-bc80-cd977ac42aa5.jpg"/></center>
 <h1>UserView</h1>
