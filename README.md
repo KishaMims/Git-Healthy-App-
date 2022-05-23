@@ -32,8 +32,8 @@ Languages
   <li>HTML</li>
   <li>CSS</li>
   <li>JavaScript</li>
-  <li>Frameworks</li>
 </ul>
+Frameworks
 <ul>
   <li>React.js</li>
   <li>Express.js</li>
