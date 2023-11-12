@@ -45,6 +45,7 @@ Frameworks
   <li>Users will be able to save and review past weeks' food journals.</li>
   <li>Users will be able to see total calories for food eaten.</li>
   </ul>
+  <p>Full Product Pitch https://www.canva.com/design/DAE-QtqrHek/O2vj90y0ASicAvupRIHhSw/watch?utm_content=DAE-QtqrHek&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink </p>
   <h1>Current Production Running on Heroku</h1>
 <a href="https://git-healthy-22.herokuapp.com">Live Link</a>
 <h1>Homepage</h1>
