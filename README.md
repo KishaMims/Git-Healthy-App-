@@ -20,7 +20,7 @@ Git Healthy is a convenient way to track your daily calorie intake from the food
 <li>Inside your server folder, open the file .env.example and copy the file there.</li>
 <li>Inside your .env file, paste the string from .env.example and change the variables with the values from the project. For this template, don't change the name of your db.</li>
 <li>Inside your server file: run the command psql -U postgres -f db.sql to restore the DB from the file db.sql.</li>
-<li>Go to the cliente folder (cd .. and cd client) and run the command npm start.</li>
+<li>Go to the client folder (cd .. and cd client) and run the command npm start.</li>
 <li> Both server should run now with npm start.</li>
 <li>Git Healthy will be running on localhost:3000.</li>
 <li>The server will run on localhost:3001.</li>
