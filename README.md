@@ -46,8 +46,6 @@ Frameworks
   <li>Users will be able to see total calories for food eaten.</li>
   </ul>
   <p>Full Product Pitch https://www.canva.com/design/DAE-QtqrHek/O2vj90y0ASicAvupRIHhSw/watch?utm_content=DAE-QtqrHek&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink </p>
-  <h1>Current Production Running on Heroku</h1>
-<a href="https://git-healthy-22.herokuapp.com">Live Link</a>
 <h1>Homepage</h1>
 <center><img src="https://user-images.githubusercontent.com/86165064/169418804-21bf70c8-9190-436b-bc80-cd977ac42aa5.jpg"/></center>
 <h1>UserView</h1>
